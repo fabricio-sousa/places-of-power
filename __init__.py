@@ -231,7 +231,7 @@ def disconnect():
         return redirect(url_for('showPlaces'))
 
 
-# Main page showing all Places of Power
+# Main page route decorator showing all Places of Power
 @app.route('/')
 @app.route('/place/')
 def showPlaces():
@@ -245,7 +245,7 @@ def showPlaces():
                                places=places)
 
 
-# Add a new Place of Power
+# Add a new Place of Power route decorator
 @app.route('/place/new/', methods=['GET', 'POST'])
 @login_required
 def addPlace():
@@ -266,7 +266,7 @@ def addPlace():
         return render_template('newplace.html')
 
 
-# Shows details of a Place of Power
+# Shows details of a Place of Power route decorator
 @app.route('/place/<int:place_id>/')
 @app.route('/place/<int:place_id>/details/')
 def showPlace(place_id):
@@ -284,7 +284,7 @@ def showPlace(place_id):
                                creator=creator)
 
 
-# Delete a Place of Power
+# Delete a Place of Power route decorator
 @app.route('/place/<int:place_id>/delete/', methods=['GET', 'POST'])
 @login_required
 def deletePlace(place_id):
@@ -306,7 +306,7 @@ def deletePlace(place_id):
                                place=placeToDelete)
 
 
-# Edit details of a Place of Power
+# Edit details of a Place of Power route decorator
 @app.route('/place/<int:place_id>/edit/', methods=['GET', 'POST'])
 @login_required
 def editPlace(place_id):
@@ -336,7 +336,14 @@ def editPlace(place_id):
                                 place=editedPlace)
 
 
-# JSON APIs to view Catalog Information
+# The Help Page route decorator.
+@app.route('/help/')
+def showHelp():
+    places = session.query(Place).order_by(desc(Place.date))
+    return render_template('help.html')
+    
+
+# JSON APIs to view Catalog Information route decorator
 @app.route('/place/json')
 def catalogJSON():
     places = session.query(Place).all()
