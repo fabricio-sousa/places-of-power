@@ -334,3 +334,10 @@ def editPlace(place_id):
         return render_template('editplace.html',
                                 place_id=place_id,
                                 place=editedPlace)
+
+
+# JSON APIs to view Catalog Information
+@app.route('/place/json')
+def catalogJSON():
+    places = session.query(Place).all()
+    return jsonify(items=[r.serialize for r in places])
