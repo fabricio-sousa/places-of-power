@@ -229,3 +229,17 @@ def disconnect():
     else:
         flash("You were not logged in")
         return redirect(url_for('showPlaces'))
+
+
+# Main page showing all Places of Power
+@app.route('/')
+@app.route('/place/')
+def showPlaces():
+    places = session.query(Place).order_by(desc(Place.date))
+
+    if 'username' not in login_session:
+        return render_template('publicplaces.html',
+                               places=places)
+    else:
+        return render_template('places.html',
+                               places=places)
