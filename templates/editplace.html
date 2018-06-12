@@ -1,0 +1,42 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+
+<main role="main" class="container">
+	<div class="starter-template">
+		<h3>{{place.name}}</h3>
+
+		<form action="#" method = "post" class="needs-validation" novalidate>
+			
+			<label for="name">New Name</label>
+			<input type="text" class="form-control"  name="name" id="address" placeholder="" required>
+			<div class="invalid-feedback">Please enter the new name.</div>
+			<hr class="mb-4">	
+			
+			<label for="description">New Description</label>
+			<input type="text" class="form-control"  name="description" id="address" placeholder="" required>
+			<div class="invalid-feedback">Please enter the new description.</div>
+			<hr class="mb-4">
+			
+			<label for="latitude">New Latitude</label>
+			<input type="text" class="form-control"  name="lat" id="address" placeholder="" required>
+			<div class="invalid-feedback">Please enter the new latitude.</div>
+			<hr class="mb-4">
+			
+			<label for="longitude">New Longitude</label>
+			<input type="text" class="form-control"  name="lng" id="address" placeholder="" required>
+			<div class="invalid-feedback">Please enter the new longitude.</div>
+			<hr class="mb-4">
+			
+			<label for="picture url">New Picture URL</label>
+			<input type="text" class="form-control"  name="picture_url" id="address" placeholder="" required>
+			<div class="invalid-feedback">Please enter the new picture URL.</div>
+			<hr class="mb-4">
+					
+			<button class="btn btn-md btn-outline-secondary" type="submit" id="submit">Update</button>
+			<a href='{{url_for('showPlaces')}}'><button type="button" class="btn btn-md btn-outline-secondary" >Cancel</button></a>
+
+		</form>		
+
+	</div>
+</main>
+
+{% endblock %}
