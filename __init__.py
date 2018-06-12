@@ -284,3 +284,24 @@ def showPlace(place_id):
                                creator=creator)
 
 
+# Delete a Place of Power
+@app.route('/place/<int:place_id>/delete/', methods=['GET', 'POST'])
+@login_required
+def deletePlace(place_id):
+    placeToDelete = session.query(
+        Place).filter_by(id=place_id).one()
+    if placeToDelete.user_id != login_session['user_id']:
+        return '''<script>function myFunction()
+                {alert('You are not authorized to delete this place.
+                Please add your own Place of Power!');}
+                </script><body onload='myFunction()'>'''
+    if request.method == 'POST':
+        session.delete(placeToDelete)
+        session.commit()
+        flash('%s Successfully Deleted!' % placeToDelete.name)
+        session.commit()
+        return redirect(url_for('showPlaces', place_id=place_id))
+    else:
+        return render_template('deleteplace.html',
+                               place=placeToDelete)
+
