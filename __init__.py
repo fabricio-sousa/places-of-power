@@ -264,3 +264,23 @@ def addPlace():
         return redirect(url_for('showPlaces'))
     else:
         return render_template('newplace.html')
+
+
+# Shows details of a Place of Power
+@app.route('/place/<int:place_id>/')
+@app.route('/place/<int:place_id>/details/')
+def showPlace(place_id):
+    place = session.query(Place).filter_by(id=place_id).one()
+    creator = getUserInfo(place.user_id)
+    if ('username' 
+        not in login_session 
+        or creator.id != login_session['user_id']):
+        return render_template('publicplace.html',
+                               place=place,
+                               creator=creator)
+    else:
+        return render_template('place.html',
+                               place=place,
+                               creator=creator)
+
+
