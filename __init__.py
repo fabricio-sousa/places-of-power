@@ -305,3 +305,32 @@ def deletePlace(place_id):
         return render_template('deleteplace.html',
                                place=placeToDelete)
 
+
+# Edit details of a Place of Power
+@app.route('/place/<int:place_id>/edit/', methods=['GET', 'POST'])
+@login_required
+def editPlace(place_id):
+    editedPlace = session.query(
+        Place).filter_by(id=place_id).one()
+    if editedPlace.user_id != login_session['user_id']:
+        return '''<script>function myFunction()
+                {alert('You are not authorized to edit this place.
+                Please add your own Place of Power!');}
+                </script><body onload='myFunction()'>'''
+    if request.method == 'POST':
+        if request.form['name']:
+            editedPlace.name = request.form['name']
+        if request.form['description']:
+            editedPlace.description = request.form['description']
+        if request.form['picture_url']:
+            editedPlace.picture_url = request.form['picture_url']
+        if request.form['lat']:
+            editedPlace.lat = request.form['lat']
+        if request.form['lng']:
+            editedPlace.lng = request.form['lng']
+            flash('Place of Power has been successfully updated!')
+            return redirect(url_for('showPlaces', place_id=place_id))
+    else:
+        return render_template('editplace.html',
+                                place_id=place_id,
+                                place=editedPlace)
