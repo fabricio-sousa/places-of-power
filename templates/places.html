@@ -1,0 +1,31 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+
+<main role="main" class="container">
+	<div class="starter-template">
+		<div class="flash">
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			{% for message in messages %}
+			{{message}}
+			{% endfor %}
+			{% endif %}
+			{% endwith %}
+		</div>
+		
+		<a href='#'><button class="btn btn-md btn-outline-secondary" type="button">Places of Power on Google Maps</button></a>
+		<hr class="mb-4">
+		<h2>Latest Places</h2>
+		<a href="{{url_for('addPlace')}}">
+			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
+		</a>
+		<hr class="mb-4">
+		{% for place in places %}
+		<a href = "{{url_for('showPlace', place_id = place.id)}}">
+			<h4>{{place.name}}</h4>
+		</a>
+		<h8>Added by {{place.user.name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}</h8>
+		{% endfor %}
+	</div>
+</main>
+
+{% endblock %}
