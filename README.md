@@ -4,7 +4,7 @@
 
 ## Description
 
-This project is part of the Places of Power main project. It is the backend/database part. It is RESTful web app create via Python and the Flask framework, SQLAlchemy, along with third-party Google OAuth authentication, backed by a PostgreSQL database. Users can login in order to create, read, update and delete their own Places of Power. It will eventually serve those places to the frontend web app that will render those places as markers on World Google Map.
+This project is part of the Places of Power main project. It is the backend/database part. It is RESTful web app created via Python and the Flask framework, SQLAlchemy, along with third-party Google OAuth authentication, backed by a PostgreSQL database. Users can login in order to create, read, update and delete their own Places of Power. It will eventually serve those places to the frontend web app that will render those places as markers on World Google Map.
 
 ## Frameworks, Libraries, and APIs
 
