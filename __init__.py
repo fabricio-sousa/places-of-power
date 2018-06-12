@@ -341,3 +341,9 @@ def editPlace(place_id):
 def catalogJSON():
     places = session.query(Place).all()
     return jsonify(items=[r.serialize for r in places])
+
+
+if __name__ == '__main__':
+    app.secret_key = 'super_secret_key'
+    app.debug = True
+    app.run()
