@@ -18,6 +18,8 @@
 		<a href="{{url_for('addPlace')}}">
 			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
 		</a>
+		<h7>For location coordinates, please visit 
+				<a class="dropdown-item" href="http://latitude.to" target="_blank">Latitude</a></h7>
 		<hr class="mb-4">
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
