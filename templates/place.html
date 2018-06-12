@@ -21,6 +21,7 @@
     <br class="mb-4">
     <h6><strong>Latitude and Longitude:</strong> {{place.lat}}, {{place.lng}}</h6>
     <h6>Added by: {{creator.name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}.</h6>
+    <br class="mb-4">
     <div class="btn-group">
       <hr class="mb-4">
       <a href="{{url_for('editPlace', place_id = place.id)}}">
