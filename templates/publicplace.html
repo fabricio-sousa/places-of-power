@@ -1,0 +1,25 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+
+<main role="main" class="container">
+    <div class="starter-template">
+        <div class="flash">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li><strong>{{message}}</strong></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
+
+        <h2>{{place.name}}</h2>
+        <img src="{{place.picture_url}}" class="img-fluid img-thumbnail" alt="Picture of a Place of Power" height="500" width="500">
+        <h6>{{place.description}}</h6>
+        <h6><strong>Latitude and Longitude:</strong> {{place.lat}}, {{place.lng}}</h6>
+        <h6>Added by {{creator.name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}.</h6>
+    </div>
+</main>
+
+{% endblock %}
