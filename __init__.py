@@ -243,3 +243,24 @@ def showPlaces():
     else:
         return render_template('places.html',
                                places=places)
+
+
+# Add a new Place of Power
+@app.route('/place/new/', methods=['GET', 'POST'])
+@login_required
+def addPlace():
+    if request.method == 'POST':
+        newPlace = Place(
+            name=request.form['name'],
+            description=request.form['description'],
+            picture_url=request.form['picture_url'],
+            lat=request.form['lat'],
+            lng=request.form['lng'],
+            date=datetime.now(),
+            user_id=login_session['user_id'])
+        session.add(newPlace)
+        flash('New Details for %s Successfully Added!' % newPlace.name)
+        session.commit()
+        return redirect(url_for('showPlaces'))
+    else:
+        return render_template('newplace.html')
