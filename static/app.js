@@ -58,3 +58,12 @@ function initMap() {
     ko.applyBindings(new ViewModel());
   
   }
+
+// This function allows each marker to be clicked triggering a google maps marker event.
+function clickMarker(name) {
+	markers.forEach(function(markerItem) {
+		if (markerItem.name == name) {
+			google.maps.event.trigger(markerItem.marker, 'click');
+		}
+	});
+}
