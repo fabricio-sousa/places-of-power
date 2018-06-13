@@ -13,8 +13,11 @@ hr {
 }
 
 #map {
-  bottom:0px;
-  height: 100%;
-  position: absolute;
-  right: 0px;
+    margin: 0;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: -4;
 }
