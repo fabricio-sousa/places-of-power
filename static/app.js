@@ -133,26 +133,17 @@ geocoder.geocode({
 
 // This function generates infowindow content.
 function placetext(place) {
-
-// If marker clicked, open; if open, and x closed, close.
-if (infoWindow.marker != place.marker) {
-	infoWindow.marker = place.marker;
-	infoWindow.open(map, place.marker);
-	infoWindow.addListener('closeclick', function() {
-		infoWindow.setMarker = null;
-	});
-
-	// Error handling function.
-	clearTimeout(wikiTimeout);
-
-	// Set the content of the ajax query to the infoWindow.
-	infoWindow.setContent('<div class="infoWindow"><h5>' + place.name +
-		'</h5><br><h6>' + place.description +
-		'<br><br>Added by ' + 'on ' +
-		'</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>'
-	);
-};
-
+	// If marker clicked, open; if open, and x closed, close.
+	if (infoWindow.marker != place.marker) {
+		infoWindow.marker = place.marker;
+		infoWindow.open(map, place.marker);
+		infoWindow.addListener('closeclick', function() {
+			infoWindow.setMarker = null;
+		});
+		
+		// Set the content of the ajax query to the infoWindow.
+		infoWindow.setContent('<div class="infoWindow"><h5>' + place.name +'</h5><br><h6>' + place.description +'<br><br>Added by ' + 'on ' +'</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>');
+	};
 }
 
 // Google Maps API error handling.
