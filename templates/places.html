@@ -3,16 +3,14 @@
 <main role="main" class="container">
 	<div class="starter-template">
 		<div class="flash">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-            <ul>
-                {% for message in messages %}
-                <li><strong>{{message}}</strong></li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-            {% endwith %}
-        </div>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			{% for message in messages %}
+			{{message}}
+			{% endfor %}
+			{% endif %}
+			{% endwith %}
+		</div>
 		<h2>Latest Places</h2>
 		<a href="{{url_for('addPlace')}}">
 			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
