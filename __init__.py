@@ -233,16 +233,13 @@ def disconnect():
 
 # Main landing page for Places of Power
 @app.route('/')
-def showPlaces():
-    places = session.query(Place).order_by(desc(Place.date))
-
+def showPlaces():    
     return render_template('index.html')
-    
+
 
 # The Help Page route decorator.
 @app.route('/help/')
 def showHelp():
-    places = session.query(Place).order_by(desc(Place.date))
     return render_template('help.html')
 
 
@@ -349,6 +346,13 @@ def editPlace(place_id):
         return render_template('editplace.html',
                                 place_id=place_id,
                                 place=editedPlace)
+
+
+# The Google Maps page route decorator
+@app.route('/map/')
+def showMap():
+    places = session.query(Place).order_by(desc(Place.date))
+    return render_template('help.html', places=places)
     
 
 # JSON APIs to view Catalog Information route decorator
