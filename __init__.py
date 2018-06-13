@@ -352,7 +352,7 @@ def editPlace(place_id):
 @app.route('/map/')
 def showMap():
     places = session.query(Place).order_by(desc(Place.date))
-    return render_template('help.html', places=places)
+    return render_template('map.html', places=places)
     
 
 # JSON APIs to view Catalog Information route decorator
