@@ -201,3 +201,7 @@ var ViewModel = function() {
 };
 
 
+// Google Maps API error handling.
+function apiError() {
+	alert("There was an issue loading the Google Maps API.");
+}
