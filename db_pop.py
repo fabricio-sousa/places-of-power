@@ -8,6 +8,11 @@ Base.metadata.bind = engine
 DBSession = scoped_session(sessionmaker(bind=engine))
 session = DBSession()
 
+
+session.query(Item).delete()
+session.query(Category).delete()
+session.query(User).delete()
+
 # Create dummy users
 User1 = User(name="Akhenaten", email="example@example.com",
              picture='https://i.imgur.com/d2lRHgd.jpg')
