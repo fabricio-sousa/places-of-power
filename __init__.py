@@ -361,6 +361,12 @@ def catalogJSON():
     places = session.query(Place).all()
     return jsonify(items=[r.serialize for r in places])
 
+# JSON APIs to view Catalog Information route decorator
+@app.route('/user/json')
+def catalogJSON():
+    users = session.query(User).all()
+    return jsonify(items=[r.serialize for r in users])
+
 
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
