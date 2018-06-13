@@ -22,20 +22,6 @@
 		
 		{% block content %}	{% endblock %}
 		
-		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
-		<script>
-			// Initialize Firebase
-			var config = {
-				apiKey: "AIzaSyAE3CiNtT_HdtOyhTjhRjT02Cz-N6VQEmc",
-				authDomain: "project-power-206803.firebaseapp.com",
-				databaseURL: "https://project-power-206803.firebaseio.com",
-				projectId: "project-power-206803",
-				storageBucket: "",
-				messagingSenderId: "768260980147"
-			};
-			firebase.initializeApp(config);
-		</script>
-
 		<script src="{{url_for('static', filename='knockout.js')}}"></script>
 		<script src="{{url_for('static', filename='app.js')}}"></script>
 		<script async defer

@@ -355,17 +355,11 @@ def showMap():
     return render_template('map.html', places=places)
     
 
-# JSON APIs to view Catalog Information route decorator
+# JSON APIs to feed Places info from database.
 @app.route('/place/json')
 def placesJSON():
     places = session.query(Place).all()
     return jsonify(items=[r.serialize for r in places])
-
-# JSON APIs to view Catalog Information route decorator
-@app.route('/user/json')
-def usersJSON():
-    users = session.query(User).all()
-    return jsonify(things=[r.serialize for r in users])
 
 
 if __name__ == '__main__':
