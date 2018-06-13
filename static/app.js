@@ -29,3 +29,32 @@ var Places = [
 var markers = [];
 var infoWindow;
 
+// This function allows for the Google Map to be rendered as well as all markers to be created.
+function initMap() {
+
+    // Constructor creates a new map.
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 3,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+          position: google.maps.ControlPosition.BOTTOM_CENTER
+      }
+    });
+      
+  
+    // Declare a new geocoder object.
+    var geocoder = new google.maps.Geocoder();
+  
+    // For each place in Places, call the geocodePlace function which geocodes the addresses.
+    Places.forEach(function(place) {
+      geocodePlace(geocoder, place, map);
+    });
+  
+    // Declare a new infoWindow object.
+    infoWindow = new google.maps.InfoWindow();
+  
+    // Apply all KnockOut Bindings.
+    ko.applyBindings(new ViewModel());
+  
+  }
