@@ -24,3 +24,8 @@ var Places = [
 		picture_url: 'https://i.imgur.com/E4DZ4nH.jpg'
 	}
 ];
+
+// Global variables. Empty array for markers and infoWindow variable.
+var markers = [];
+var infoWindow;
+
