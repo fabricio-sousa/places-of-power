@@ -14,16 +14,6 @@ class User(Base):
     email = Column(String(250), nullable = False)
     picture = Column(String(250))
 
-    @property
-    def serialize(self):
-        """Return object data in easily serializeable format"""
-        return {
-            'name'          : self.name,
-            'id'            : self.id,
-            'email'         : self.email,
-            'picture'       : self.picture
-        }
-
 
 class Place(Base):
     __tablename__ = 'place'
@@ -42,12 +32,14 @@ class Place(Base):
     def serialize(self):
         """Return object data in easily serializeable format"""
         return {
-            'name'          : self.name,
             'id'            : self.id,
+            'name'          : self.name,            
             'description'   : self.description,
             'lat'           : self.lat,
             'lng'           : self.lng,
             'picture_url'   : self.picture_url
+            'date'          : self.date
+            'creator'       : self.user.name
         }
 
 engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
