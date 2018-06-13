@@ -233,7 +233,7 @@ def disconnect():
 
 # Main landing page for Places of Power
 @app.route('/')
-def showPlaces():    
+def Main():    
     return render_template('index.html')
 
 
