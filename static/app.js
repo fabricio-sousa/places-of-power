@@ -170,5 +170,34 @@ function placeText (place) {
 }
 
 
+// This is the ViewModel function connecting all views, model and user input functionalities.
+var ViewModel = function() {
+
+	var self = this;
+	this.search = ko.observable("");
+
+	// Filter Places based on user input.
+	this.searchPlaces = ko.computed(function() {
+		var search = self.search().toLowerCase();
+		if (!search) {
+			Places.forEach(function(place) {
+				if (place.marker) {
+					place.marker.setVisible(true);
+				}
+			});
+			return Places;
+		} else {
+			return ko.utils.arrayFilter(Places, function(place) {
+		 		var match = place.name.toLowerCase().indexOf(search) !== -1;
+		 		if (match) {
+		 			place.marker.setVisible(true);
+		 		} else {
+		 			place.marker.setVisible(false);
+		 		}
+		 		return match;
+		 	});
+		}
+	});
+};
 
 
