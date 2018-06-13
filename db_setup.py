@@ -37,8 +37,8 @@ class Place(Base):
             'description'   : self.description,
             'lat'           : self.lat,
             'lng'           : self.lng,
-            'picture_url'   : self.picture_url
-            'date'          : self.date
+            'picture_url'   : self.picture_url,
+            'date'          : self.date,
             'creator'       : self.user.name
         }
 
