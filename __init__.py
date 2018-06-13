@@ -365,7 +365,7 @@ def placesJSON():
 @app.route('/user/json')
 def usersJSON():
     users = session.query(User).all()
-    return jsonify(users=[r.serialize for r in users])
+    return jsonify(things=[r.serialize for r in users])
 
 
 if __name__ == '__main__':
