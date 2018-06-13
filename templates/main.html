@@ -28,29 +28,10 @@
     	src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC9w2jgB1rAgTssTI76UGl1QnCEDvFlFUc&callback=initMap"  onerror="apiError()">
   		</script>
 		
-		<!-- Bootstrap and jQuery javascript -->
-		<script src="{{url_for('static', filename='jquery-3.3.1.min')}}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<!-- Bootstrap and jQuery javascript -->		
 		<script src="{{url_for('static', filename='popper.min.js')}}"></script>
 		<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
 		<script src="{{url_for('static', filename='holder.min.js')}}"></script>
-		<script>
-			// Example starter JavaScript for disabling form submissions if there are invalid fields
-			(function() {
-				'use strict';
-				window.addEventListener('load', function() {
-					// Fetch all the forms we want to apply custom Bootstrap validation styles to	var forms = document.getElementsByClassName('needs-validation');
-					// Loop over them and prevent submission
-					var validation = Array.prototype.filter.call(forms, function(form) {
-						form.addEventListener('submit', function(event) {
-							if (form.checkValidity() === false) {
-								event.preventDefault();
-								event.stopPropagation();
-								}
-								form.classList.add('was-validated');
-								}, false);
-								});
-								}, false);
-								})();
-		</script>
+		<script src="{{url_for('static', filename='jquery-3.3.1.min')}}"></script>
 	</body>
 </html>
