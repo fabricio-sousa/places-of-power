@@ -79,3 +79,49 @@ function markerBounce(marker) {
 		}, 1200);
 	}
 }
+
+// geocodes the address passed from the forEach function, for each place in Places.
+function geocodePlace(geocoder, place, placesMap) {
+
+    var latlng = {lat: parseFloat(place.lat), lng: parseFloat(place.lng)};
+
+	// Uses Google's geocode method to parse the latlng of the place.address then set it on map.
+	geocoder.geocode({'location': latlng}, function(results, status) {
+		if (status === 'OK') {
+			placesMap.setCenter(results[0].geometry.location);
+
+			// Create a new place marker object based on geocode latlng results.
+             // Animate the marker.
+			place.marker = new google.maps.Marker({
+				map: placesMap,
+                position: latlng,
+  			    animation: google.maps.Animation.DROP,
+			});
+
+			// Add name and marker to marker object.
+			markers.push({
+				name: place.name,
+				marker: place.marker
+			});
+
+			// Event listener for when user clicks on marker.
+      // Clicking marker will show the Wikipedia info and bounce the marker.
+      google.maps.event.addListener(place.marker, 'click', function() {
+			placetext(place);
+  			markerBounce(place.marker);
+			map.panTo(place.marker.position)
+  		});
+
+			//Resize Function
+			google.maps.event.addDomListener(window, "resize", function() {
+				var center = map.getCenter();
+				google.maps.event.trigger(map, "resize");
+				map.setCenter(center);
+			});
+
+    } else {
+			alert('This location has an invalid address.');
+		}
+  });
+}
+
