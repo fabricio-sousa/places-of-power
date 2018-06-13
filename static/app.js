@@ -36,8 +36,8 @@ map = new google.maps.Map(document.getElementById('map'), {
 	zoom: 3,
 	mapTypeControl: true,
 	mapTypeControlOptions: {
-			style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-			position: google.maps.ControlPosition.BOTTOM_CENTER
+		style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+		position: google.maps.ControlPosition.BOTTOM_CENTER
 	}
 });
 
@@ -59,8 +59,8 @@ infoWindow = new google.maps.InfoWindow();
 function clickMarker(name) {
 markers.forEach(function(markerItem) {
 	if (markerItem.name == name) {
-			google.maps.event.trigger(markerItem.marker,
-					'click');
+		google.maps.event.trigger(markerItem.marker,
+			'click');
 	}
 });
 }
@@ -72,7 +72,7 @@ if (marker.getAnimation() !== null) {
 } else {
 	marker.setAnimation(google.maps.Animation.BOUNCE);
 	setTimeout(function() {
-			marker.setAnimation(null);
+		marker.setAnimation(null);
 	}, 1200);
 }
 }
@@ -90,54 +90,68 @@ geocoder.geocode({
 	'location': latlng
 }, function(results, status) {
 	if (status === 'OK') {
-			placesMap.setCenter(results[0].geometry.location);
+		placesMap.setCenter(results[0].geometry.location);
 
-			// Create a new place marker object based on geocode latlng results.
-			// Animate the marker.
-			place.marker = new google.maps.Marker({
-					map: placesMap,
-					position: latlng,
-					animation: google.maps.Animation.DROP,
+		// Create a new place marker object based on geocode latlng results.
+		// Animate the marker.
+		place.marker = new google.maps.Marker({
+			map: placesMap,
+			position: latlng,
+			animation: google.maps.Animation.DROP,
+		});
+
+		// Add name and marker to marker object.
+		markers.push({
+			name: place.name,
+			marker: place.marker
+		});
+
+		// Event listener for when user clicks on marker.
+		// Clicking marker will show the Wikipedia info and bounce the marker.
+		google.maps.event.addListener(place.marker,
+			'click',
+			function() {
+				placetext(place);
+				markerBounce(place.marker);
+				map.panTo(place.marker.position)
 			});
 
-			// Add name and marker to marker object.
-			markers.push({
-					name: place.name,
-					marker: place.marker
+		//Resize Function
+		google.maps.event.addDomListener(window, "resize",
+			function() {
+				var center = map.getCenter();
+				google.maps.event.trigger(map,
+					"resize");
+				map.setCenter(center);
 			});
-
-			// Event listener for when user clicks on marker.
-			// Clicking marker will show the Wikipedia info and bounce the marker.
-			google.maps.event.addListener(place.marker,
-					'click',
-					function() {
-							placetext(place);
-							markerBounce(place.marker);
-							map.panTo(place.marker.position)
-					});
-
-			//Resize Function
-			google.maps.event.addDomListener(window, "resize",
-					function() {
-							var center = map.getCenter();
-							google.maps.event.trigger(map,
-									"resize");
-							map.setCenter(center);
-					});
 
 	} else {
-			alert('This location has an invalid address.');
+		alert('This location has an invalid address.');
 	}
 });
 }
 
 // This function generates infowindow content.
 function placetext(place) {
-	
+
+// If marker clicked, open; if open, and x closed, close.
+if (infoWindow.marker != place.marker) {
+	infoWindow.marker = place.marker;
+	infoWindow.open(map, place.marker);
+	infoWindow.addListener('closeclick', function() {
+		infoWindow.setMarker = null;
+	});
+
+	// Error handling function.
+	clearTimeout(wikiTimeout);
+
+	// Set the content of the ajax query to the infoWindow.
 	infoWindow.setContent('<div class="infoWindow"><h5>' + place.name +
-	'</h5><br><h6>' + place.description + '<br><br>Added by ' +
-	'on ' +
-	'</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>')
+		'</h5><br><h6>' + place.description +
+		'<br><br>Added by ' + 'on ' +
+		'</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>'
+	);
+};
 
 }
 
