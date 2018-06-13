@@ -67,3 +67,15 @@ function clickMarker(name) {
 		}
 	});
 }
+
+// This function allows a marker to have a bounce animation.
+function markerBounce(marker) {
+	if (marker.getAnimation() !== null) {
+		marker.setAnimation(null);
+	} else {
+		marker.setAnimation(google.maps.Animation.BOUNCE);
+		setTimeout(function() {
+			marker.setAnimation(null);
+		}, 1200);
+	}
+}
