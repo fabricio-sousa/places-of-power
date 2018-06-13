@@ -1,0 +1,20 @@
+{% extends "main.html" %} {% block content %} {% include "header.html" %}
+
+<main role="main" class="container">
+    <div class="starter-template">
+        <h1>Welcome to Places of Power</h1>
+        <h2>What are places of power?</h2>
+        <p class="lead">Egypt, Stonehenge, Machu Picchu. Places of Power are geolocations across the globe, 
+          known for their spiritual, religious and mystical significance. 
+          Some are ancient, others are modern. They are centers of energy and inspiration.
+          Some are well known, like the Great Pyramids of Egypt,
+          yet there are those Places of Power unique to only a few people, perhaps to even just one person.
+          This site aims to discover and catalogue all such places by having you, as the user, contribute with your own Places.
+          Together we can learn and discover these mysterious locations. This project is dedicated to all 
+          those who seek magic in a disenchanted modern world. Are you ready to start your journey?
+          <a href='{{url_for('showPlaces')}}'><button class="btn btn-lg btn-outline-secondary" type="button">Begin</button></a>
+        </p>
+    </div>
+</main>
+
+{% endblock %}
