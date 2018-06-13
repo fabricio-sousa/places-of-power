@@ -1,7 +1,8 @@
 {% extends "main.html" %} {% block content %} {% include "header.html" %}
 
 <main role="main" class="container">
-	<div class="starter-template">		
+	<div class="starter-template">
+		<h1>The Google Map (in construction)</h1>	
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
 			<h4>{{place.name}}</h4>
