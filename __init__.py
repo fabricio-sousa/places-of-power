@@ -231,8 +231,15 @@ def disconnect():
         return redirect(url_for('showPlaces'))
 
 
-# Main page route decorator showing all Places of Power
+# Main landing page for Places of Power
 @app.route('/')
+def showPlaces():
+    places = session.query(Place).order_by(desc(Place.date))
+
+    return render_template('index.html')
+
+
+# Main page route decorator showing all Places of Power
 @app.route('/place/')
 def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
