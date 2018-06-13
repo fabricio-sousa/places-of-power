@@ -237,6 +237,14 @@ def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
 
     return render_template('index.html')
+    
+
+# The Help Page route decorator.
+@app.route('/help/')
+def showHelp():
+    places = session.query(Place).order_by(desc(Place.date))
+    return render_template('help.html')
+
 
 
 # Main page route decorator showing all Places of Power
@@ -341,13 +349,6 @@ def editPlace(place_id):
         return render_template('editplace.html',
                                 place_id=place_id,
                                 place=editedPlace)
-
-
-# The Help Page route decorator.
-@app.route('/help/')
-def showHelp():
-    places = session.query(Place).order_by(desc(Place.date))
-    return render_template('help.html')
     
 
 # JSON APIs to view Catalog Information route decorator
