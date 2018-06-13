@@ -21,6 +21,12 @@
 	<body>
 		
 		{% block content %}	{% endblock %}
+
+		<script src="{{url_for('static', filename='knockout.js"></script>
+		<script src="{{url_for('static', filename='app.js"></script>
+		<script async defer
+    	src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyC9w2jgB1rAgTssTI76UGl1QnCEDvFlFUc&callback=initMap"  onerror="apiError()">
+  		</script>
 		
 		<!-- Bootstrap and jQuery javascript -->
 		<script src="{{url_for('static', filename='jquery-3.3.1.slim.min.js')}}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
