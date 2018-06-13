@@ -19,10 +19,8 @@
 			</li>
 			
 			<li class="nav-item active">
-				{%if 'username' in session %}
 				<a class="nav-link" href="{{url_for('addPlace')}}">Add a Place</a>
 				<a class="nav-link" href="{{url_for('disconnect')}}">Logout</a>
-				{% endif %}
 			</li>
 			
 			<li class="nav-item active">
