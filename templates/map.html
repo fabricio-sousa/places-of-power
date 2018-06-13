@@ -1,13 +1,37 @@
-{% extends "main.html" %} {% block content %} {% include "header.html" %}
+{% extends "main.html" %} {% block content %}
 
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<a class="navbar-brand" href="{{url_for('showPlaces')}}">Places of Power</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="{{url_for('addPlace')}}">Add a Place</a>
+			</li>
+		</ul>
+	</div>
+	
+	<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
+	
+	<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
+		<ul data-bind="foreach: searchPlaces" class="list-group">
+			<a  href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
+		</ul>
+	</div>
+	
+	<form class="form-inline my-2 my-lg-0"> <!-- Search for a Place -->
+		<input data-bind="value: search, valueUpdate: 'input'" class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+	</form>
+</nav>
+
+<!-- The Google Map -->
 <main role="main" class="container">
 	<div class="starter-template">
-		<h1>The Google Map (in construction)</h1>	
-		{% for place in places %}
-		<a href = "{{url_for('showPlace', place_id = place.id)}}">
-			<h4>{{place.name}}</h4>
-		</a>	
-		{% endfor %}
+		<div id="map"></div>
 	</div>
 </main>
 
