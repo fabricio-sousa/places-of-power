@@ -133,11 +133,13 @@ geocoder.geocode({
 
 // This function generates infowindow content.
 function placetext(place) {
+	
 	infoWindow.setContent('<div class="infoWindow"><h5>' + place.name +
 	'</h5><br><h6>' + place.description + '<br><br>Added by ' +
 	'on ' +
-	'</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>'
-)
+	'</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>')
+
+}
 
 // Google Maps API error handling.
 function apiError() {
