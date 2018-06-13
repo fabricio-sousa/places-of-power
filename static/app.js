@@ -127,45 +127,10 @@ function geocodePlace(geocoder, place, placesMap) {
 
 // This function generates infowindow content.
 function placeText (place) {
-
-	// Set the wikiURL with the place.name and json and callback.
-	var wikiURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + place.name + '&format=json&callback=wikiCallback';
-
-	// Declare a timeout function in case there is an issue with the wikipedia API.
-	var wikiTimeout = setTimeout(function () { alert("There was an error loading the Wikipedia page for this place."); }, 4000);
-
-	wikiText = '';
-
-	// AJAX call to retrieve wikipedia article blurb.
-	$.ajax ({
-		url: wikiURL,
-		dataType: "jsonp",
-
-		//  Upon AJAX callback success, if there is an entry, set wikiText to the blurb; else to no articles found message.
-		success: function (response) {
-			if (response[2][0] !== undefined) {
-				wikiText = response[2][0];
-			} else {
-				wikiText = "No wikipedia articles were found for this place.";
-			}
-
-			// If marker clicked, open; if open, and x closed, close.
-			if (infoWindow.marker != place.marker) {
-				infoWindow.marker = place.marker;
-				infoWindow.open(map, place.marker);
-				infoWindow.addListener('closeclick', function() {
-					infoWindow.setMarker = null;
-				});
-
-				// Error handling function.
-				clearTimeout(wikiTimeout);
-
-				// Set the content of the ajax query to the infoWindow.
-				infoWindow.setContent('<div class="infoWindow"><h5>' + place.name + 
-				'</h5><br><h6>' + place.description + '<br><br>Added by ' + 'on ' + '</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>');
-			};
-		}
-	});
+	
+	infoWindow.setContent('<div class="infoWindow"><h5>' + place.name + 
+				'</h5><br><h6>' + place.description + '<br><br>Added by ' + 
+				'on ' + '</h6><br><br><a href="http://www.wikipedia.com">Wikipedia Info</a>');
 
 }
 
