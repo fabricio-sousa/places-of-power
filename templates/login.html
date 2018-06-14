@@ -1,37 +1,48 @@
-<html>
+<!DOCTYPE html>
 
-<head>
+<html manifest="{{url_for('static', filename='manifest.appcache')}}" lang="en">
+
+  <head>
     <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="//apis.google.com/js/platform.js?onload=start">
-    </script>
+    <script src="//apis.google.com/js/platform.js?onload=start"></script>
     <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
-</head>
+  </head>
 
-<body>
+  <body>
 
     <main role="main" class="container">
-        <div class="starter-template">
-          
-            <img src="{{url_for('static', filename='machupicchu.jpg')}}" class="img-fluid img-thumbnail" alt="Picture of a Place of Power" height="400" width="400">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-            <div id="signinButton">
-                <span class="g-signin" data-scope="openid email" data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com" data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin" data-callback="signInCallback" data-approvalprompt="force">
-                  </span>
-            </div>
+      <div class="starter-template">
 
-            <div id="result"></div>
+        <img src="{{url_for('static', filename='machupicchu.jpg')}}" 
+            class="img-fluid img-thumbnail" 
+            alt="Picture of a Place of Power" 
+            height="400" width="400">
+        
+        <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
 
-          </div>
+        <div id="signinButton">
+          <span class="g-signin" data-scope="openid email" 
+                data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com" 
+                data-redirecturi="postmessage" 
+                data-accesstype="offline" 
+                data-cookiepolicy="single_host_origin" 
+                data-callback="signInCallback" 
+                data-approvalprompt="force">
+          </span>
+        </div>
+        
+        <div id="result"></div>
+      </div>
     </main>
-
-
+    
     <script>
         function signInCallback(authResult) {
             if (authResult['code']) {
                 // Hide the sign-in button now that the user is authorized
                 $('#signinButton').attr('style', 'display: none');
-                // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main page.
+                // Send the one-time-use code to the server, if the server responds, 
+                // write a 'login successful' message to the web page and then redirect back to the main page.
                 $.ajax({
                     type: 'POST',
                     url: '/gconnect?state={{STATE}}',
