@@ -32,11 +32,11 @@ var Places = [{
 ];
 
 var placesJSON = "http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/place/json";
-var xhReq = new XMLHttpRequest();
-xhReq.open("GET", placesJSON, false);
-xhReq.send(null);
-var newPlaces = JSON.parse(xhReq.responseText);
-alert(newPlaces);
+$.getJSON(placesJSON, function(data) {
+	//data is the JSON string
+	var jsonObj = JSON.parse(data);  
+	alert(jsonObj);  
+  });
 
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
