@@ -1,4 +1,4 @@
-# Project Places of Power | Backend (In production)
+# Project Places of Power (In production)
 
 #### Developer: Fabricio Sousa
 
