@@ -32,27 +32,6 @@ var Places = [{
 ];
 
 
-// This function allows the wiki API to provide marker infoWindow content.
-function Model () {
-
-	var jsonURL = "http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/place/json";
-	var newParks = [];
-
-	// AJAX call to retrieve wikipedia article blurb.
-	$.ajax ({
-		url: jsonURL,
-		dataType: "jsonp",
-
-		//  Upon AJAX callback success, if there is an entry, set wikiText to the blurb; else to no articles found message.
-		success: function (response) {
-			newParks = response;
-			alert(newParks);
-		}
-	});
-}
-
-Model();
-
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
 var infoWindow;
