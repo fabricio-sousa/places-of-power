@@ -31,6 +31,11 @@ var Places = [{
 }
 ];
 
+function myFunc() {
+	alert(newPlaces);
+    return newPlaces;
+}
+
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
 var infoWindow;
