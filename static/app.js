@@ -37,15 +37,17 @@ $(document).ready(function() {
     var request = $.ajax({
         type: "GET",
         url: "/place/json",
-        dataType: "html"
+		dataType: "html",
+		async:false
     });
 
     request.done(function(JSON_array) {
 		array_data = JSON.parse(JSON_array)["array"];
 		newPlaces = array_data;
-		alert(newPlaces);
     });
 });
+
+alert(newPlaces);
 
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
