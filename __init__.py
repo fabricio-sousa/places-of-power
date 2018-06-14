@@ -243,6 +243,11 @@ def showHelp():
     return render_template('help.html')
 
 
+# The SignIn Page route decorator.
+@app.route('/signin/')
+def showHelp():
+    return render_template('signin.html')
+
 
 # Main page route decorator showing all Places of Power
 @app.route('/place/')
