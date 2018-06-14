@@ -12,6 +12,9 @@
 			{% endwith %}
 		</div>
 		<h2>Latest Places</h2>
+		<a href="{{url_for('addPlace')}}">
+			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
+		</a>
 		<hr class="mb-4">		
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
