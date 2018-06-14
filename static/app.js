@@ -31,7 +31,6 @@ var Places = [{
 }
 ];
 
-alert(Places);
 
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
