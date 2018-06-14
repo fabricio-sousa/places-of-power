@@ -41,9 +41,10 @@ $(document).ready(function() {
 
     request.done(function(JSON_array) {
 		array_data = JSON.parse(JSON_array)["array"]
-		alert(array_data);
     });
 });
+
+alert(array_data);
 
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
