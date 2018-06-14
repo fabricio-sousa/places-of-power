@@ -34,7 +34,7 @@ var Places = [{
 
 $(document).ready(function() {
     var request = $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/place/json",
         dataType: "html"
     });
