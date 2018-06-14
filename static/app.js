@@ -47,7 +47,7 @@ $(document).ready(function() {
     });
 });
 
-alert(newPlaces);
+alert(Places);
 
 // Global variables. Empty array for markers and infoWindow variable.
 var markers = [];
