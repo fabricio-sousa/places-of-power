@@ -13,11 +13,6 @@
 
     <main role="main" class="container">
       <div class="starter-template">
-
-        <img src="{{url_for('static', filename='machupicchu.jpg')}}" 
-            class="img-fluid img-thumbnail" 
-            alt="Picture of a Place of Power" 
-            height="400" width="400">
         
         <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
 
@@ -35,7 +30,7 @@
         <div id="result"></div>
       </div>
     </main>
-    
+
     <script>
         function signInCallback(authResult) {
             if (authResult['code']) {
