@@ -56,7 +56,7 @@ def login_required(f):
 
 
 # Create anti-forgery state token route decorator.
-@app.route('/login')
+@app.route('/login/')
 def showLogin():
 
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -67,7 +67,7 @@ def showLogin():
 
 
 # gconnect route decorator.
-@app.route('/gconnect', methods=['POST'])
+@app.route('/gconnect/', methods=['POST'])
 def gconnect():
     # Validate state token
     if request.args.get('state') != login_session['state']:
@@ -188,7 +188,7 @@ def getUserID(email):
 
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
-@app.route('/gdisconnect')
+@app.route('/gdisconnect/')
 def gdisconnect():
     # Only disconnect a connected user.
     access_token = login_session.get('access_token')
@@ -212,7 +212,7 @@ def gdisconnect():
 
 
 # Disconnect based on provider
-@app.route('/disconnect')
+@app.route('/disconnect/')
 def disconnect():
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
@@ -349,16 +349,15 @@ def editPlace(place_id):
 
 # The Google Maps page route decorator
 @app.route('/map/')
-def showMap():
-    places = session.query(Place).order_by(desc(Place.date))
-    return render_template('map.html', places=places)
+def showMap():    
+    return render_template('map.html')
     
 
 # JSON APIs to feed Places info from database.
-@app.route('/place/json')
+@app.route('/place/json/')
 def placesJSON():
     places = session.query(Place).all()
-    return jsonify(items=[r.serialize for r in places])
+    return jsonify(array=places)
 
 
 if __name__ == '__main__':
