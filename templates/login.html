@@ -1,43 +1,35 @@
 <!DOCTYPE html>
+<html>
 
-<html manifest="{{url_for('static', filename='manifest.appcache')}}" lang="en">
+<head>
 
-  <head>
     <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
     <script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}"></script>
     <script src="//apis.google.com/js/platform.js?onload=start"></script>
     <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
-  </head>
 
-  <body>
 
-    <main role="main" class="container">
-      <div class="starter-template">
-        
-        <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+</head>
 
-        <div id="signinButton">
-          <span class="g-signin" data-scope="openid email" 
-                data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com" 
-                data-redirecturi="postmessage" 
-                data-accesstype="offline" 
-                data-cookiepolicy="single_host_origin" 
-                data-callback="signInCallback" 
-                data-approvalprompt="force">
+<body>
+
+    <!-- GOOGLE PLUS SIGN IN-->
+
+    <div id="signinButton">
+        <span class="g-signin" data-scope="openid email" data-clientid="13140951618-15nik769cellkubaqnjk5facdib2dh4d.apps.googleusercontent.com"
+            data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
+            data-callback="signInCallback" data-approvalprompt="force">
           </span>
-        </div>
-        
-        <div id="result"></div>
-      </div>
-    </main>
+    </div>
+
+    <div id="result"></div>
 
     <script>
         function signInCallback(authResult) {
             if (authResult['code']) {
                 // Hide the sign-in button now that the user is authorized
                 $('#signinButton').attr('style', 'display: none');
-                // Send the one-time-use code to the server, if the server responds, 
-                // write a 'login successful' message to the web page and then redirect back to the main page.
+                // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
                 $.ajax({
                     type: 'POST',
                     url: '/gconnect?state={{STATE}}',
@@ -47,21 +39,31 @@
                     success: function(result) {
                         // Handle or verify the server response if necessary.
                         if (result) {
-                            $('#result').html(result)
+                            $('#result').html(
+                                'Login Successful!</br>' +
+                                result + '</br>Redirecting...')
                             setTimeout(function() {
-                                window.location.href = "/place";
+                                window.location.href =
+                                    "/restaurant";
                             }, 4000);
+
                         } else if (authResult['error']) {
-                            console.log('There was an error: ' + authResult['error']);
+                            console.log('There was an error: ' +
+                                authResult['error']);
                         } else {
-                            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                            $('#result').html(
+                                'Failed to make a server-side call. Check your configuration and console.'
+                            );
                         }
                     }
+
                 });
             }
         }
     </script>
+
     <!--END GOOGLE PLUS SIGN IN -->
+
 </body>
 
 </html>
