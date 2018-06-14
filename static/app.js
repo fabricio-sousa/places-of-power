@@ -36,7 +36,7 @@ $(document).ready(function() {
     var request = $.ajax({
         type: "GET",
         url: "/place/json",
-        dataType: "html"
+        dataType: "json"
     });
 
     request.done(function(JSON_array) {
