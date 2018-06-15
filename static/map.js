@@ -145,6 +145,7 @@ var ViewModel = function() {
 	var self = this;
     this.search = ko.observable("");
     var Places = [];
+    var data;
     $.ajax({
         dataType: "json",
         url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
