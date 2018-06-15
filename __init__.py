@@ -54,7 +54,7 @@ def login_required(f):
     return x
 
 
-# Create anti-forgery state token route decorator.
+# Create anti-forgery state token
 @app.route('/login')
 def showLogin():
 
@@ -65,7 +65,7 @@ def showLogin():
     return render_template('login.html', STATE=state)
 
 
-# gconnect route decorator.
+# gconnect
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -142,24 +142,23 @@ def gconnect():
     login_session['provider'] = 'google'
 
     # see if user exists, if it doesn't make a new one
-    user_id = getUserID(login_session['email'])
+    user_id = getUserID(data["email"])
     if not user_id:
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
 
     output = ''
-    output += '<img src="'
-    output += login_session['picture']
-    output += '''"style = "width: 150px;
-                            height: 150px;border-radius: 75px;
-                            -webkit-border-radius: 75px;
-                            -moz-border-radius: 75px;">'''
     output += '<h1>Welcome, '
     output += login_session['username']
-    output += '! Retrieving the latest Places of Power...</h1>'
-   
-    
-    flash("You are now logged in as %s" % login_session['username'])
+    output += '!</h1>'
+    output += '<img src="'
+    output += login_session['picture']
+    output += '''"style = "width: 300px;
+                            height: 300px;border-radius: 150px;
+                            -webkit-border-radius: 150px;
+                            -moz-border-radius: 150px;">'''
+    flash("you are now logged in as %s" % login_session['username'])
+    print "done!"
     return output
 
 
@@ -223,11 +222,12 @@ def disconnect():
         del login_session['picture']
         del login_session['user_id']
         del login_session['provider']
-        flash("You are now logged out.")
+        flash("You have successfully been logged out.")
         return redirect(url_for('showPlaces'))
     else:
         flash("You were not logged in")
         return redirect(url_for('showPlaces'))
+
 
 
 # Main landing page for Places of Power
