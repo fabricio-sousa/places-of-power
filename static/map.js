@@ -141,42 +141,54 @@ function placetext(place) {
 
 // This is the ViewModel function connecting all views, model and user input functionalities.
 var ViewModel = function() {
-    var data;
-    var Places = [];
-    var self = this;
-    this.search = ko.observable("");
 
-    $.ajax({
-        dataType: "json",
-        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
-        data: data,
-        success: function (data) {
-            // begin accessing JSON data here            
-            Places = data['places'];            
-            // Filter Parks based on user input.
-	        this.listPlaces = ko.computed(function() {
-		        var search = self.search().toLowerCase();
-		        if (!search) {
-			        Places.forEach(function(place) {
-				        if (place.marker) {
-					        place.marker.setVisible(true);
-				        }
-			        });
-			        return Places;
-		        } else {
-			        return ko.utils.arrayFilter(Places, function(place) {
-		 		        var match = place.name.toLowerCase().indexOf(search) !== -1;
-		 		        if (match) {
+	var self = this;
+	this.search = ko.observable("");
+
+	// Filter Places based on user input.
+	this.listPlaces = ko.computed(function() {
+		var search = self.search().toLowerCase();
+		if (!search) {
+            $.ajax({
+                dataType: "json",
+                url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+                data: data,
+                success: function (data) {
+                    // begin accessing JSON data here
+                    // For each place in Places, call the geocodePlace function which geocodes the addresses.
+                    Places = data['places'];
+                    Places.forEach(function(place) {
+                        if (place.marker) {
                             place.marker.setVisible(true);
-		 		        } else {
-                            place.marker.setVisible(false);
-		 		        }
-		 		        return match;
-		 	        });
-		        }
-	        });
-        }
-    });
+                        }
+                    });
+                    return Places;
+                }
+            });
+			
+		} else {
+            $.ajax({
+                dataType: "json",
+                url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+                data: data,
+                success: function (data) {
+                    // begin accessing JSON data here
+                    // For each place in Places, call the geocodePlace function which geocodes the addresses.
+                    Places = data['places'];
+                    return ko.utils.arrayFilter(Places, function(place) {
+                        var match = place.name.toLowerCase().indexOf(search) !== -1;
+                        if (match) {
+                           place.marker.setVisible(true);
+                        } else {
+                           place.marker.setVisible(false);
+                        }
+                        return match;
+                    });
+                }
+            });
+			
+		}
+	});
 };
 
 // Google Maps API error handling.
