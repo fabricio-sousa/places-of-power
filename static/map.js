@@ -31,7 +31,7 @@ function initMap() {
         success: function (data) {
             // begin accessing JSON data here
             // For each place in Places, call the geocodePlace function which geocodes the addresses.
-            Places = data;
+            Places = data['places'];
             Places.forEach(function(place) {
                 geocodePlace(geocoder, place, map);
             });
