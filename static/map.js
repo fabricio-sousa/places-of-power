@@ -9,7 +9,7 @@ function fetchPlaces() {
     var data;
     $.ajax({
         dataType: "json",
-        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json',
         data: data,
         async: false,
         success: function (data) {
