@@ -143,7 +143,8 @@ function placetext(place) {
 var ViewModel = function() {
 
 	var self = this;
-	this.search = ko.observable("");
+    this.search = ko.observable("");
+    var data;
 
 	// Filter Places based on user input.
 	this.listPlaces = ko.computed(function() {
