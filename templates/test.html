@@ -42,20 +42,19 @@
         <script src="{{url_for('static', filename='holder.min.js')}}"></script>
         
         <script>
-            var data = [];
             $(document).ready(function () {
-                var data;
+                var Places;
                 $.ajax({
                     dataType: "json",
                     url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
-                    data: data,
-                    success: function (data) {
+                    data: Places,
+                    success: function (Places) {
                         // begin accessing JSON data here
-                        // console.log(data);
+                        console.log(Places);
+                        
                     }
                 });
             });
-            console.log(data);
         </script>
     </body>
 
