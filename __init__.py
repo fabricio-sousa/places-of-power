@@ -360,7 +360,7 @@ def showMap():
 
 
 # JSON APIs to feed Places info from database.
-@app.route('/place/json/')
+@app.route('/json/')
 def placesJSON():
     places = session.query(Place).all()
     return jsonify(places=[r.serialize for r in places])
