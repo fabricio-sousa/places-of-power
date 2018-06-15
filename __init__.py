@@ -270,7 +270,7 @@ def addPlace():
             lat=request.form['lat'],
             lng=request.form['lng'],
             date=datetime.now(),
-            user_id=login_session['user_id'])
+            user_name=login_session['username'])
         session.add(newPlace)
         flash('New Details for %s Successfully Added!' % newPlace.name)
         session.commit()

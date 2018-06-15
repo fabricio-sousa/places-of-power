@@ -25,6 +25,7 @@ class Place(Base):
     lat = Column(String(250), nullable=False)
     lng = Column(String(250), nullable=False)
     picture_url = Column(String(250), nullable=False)
+    user_name = Column(Integer, ForeignKey('user.name'))
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
@@ -39,7 +40,7 @@ class Place(Base):
             'lng'           : self.lng,
             'picture_url'   : self.picture_url,
             'date'          : self.date,
-            'creator'       : self.user.name
+            'user_name'     : self.user_name
         }
 
 engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
