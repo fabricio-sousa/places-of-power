@@ -1,9 +1,10 @@
 // Global variables. Empty array for markers and infoWindow variable.
+var Places = [];
 var markers = [];
 var infoWindow;
 
 // Modal array built from async: false JSON request, fetching data from the backend.
-var Places = function() {
+function fetchPlaces() {
     var places;
     $.ajax({
         dataType: "json",
@@ -18,6 +19,8 @@ var Places = function() {
     });
     return places;
 }
+
+fetchPlaces();
 
 console.log(Places);
     
