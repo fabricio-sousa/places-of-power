@@ -22,24 +22,21 @@ function initMap() {
 
     // Declare a new geocoder object.
     var geocoder = new google.maps.Geocoder();
-
-    $(document).ready(function () {
-        var Places;
-        $.ajax({
-            dataType: "json",
-            url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
-            data: Places,
-            success: function (Places) {
-                // begin accessing JSON data here
-                // For each place in Places, call the geocodePlace function which geocodes the addresses.
-                Places.forEach(function(place) {
-                    geocodePlace(geocoder, place, map);
-                });
-                
-                // Declare a new infoWindow object.
-                infoWindow = new google.maps.InfoWindow();
-            }
-        });
+    var Places;
+    $.ajax({
+        dataType: "json",
+        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+        data: Places,
+        success: function (Places) {
+            // begin accessing JSON data here
+            // For each place in Places, call the geocodePlace function which geocodes the addresses.
+            Places.forEach(function(place) {
+                geocodePlace(geocoder, place, map);
+            });
+            
+            // Declare a new infoWindow object.
+            infoWindow = new google.maps.InfoWindow();
+        }
     });
 }
 
