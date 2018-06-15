@@ -18,6 +18,8 @@ var Places = function() {
     });
     return places;
 }
+
+console.log(Places);
     
 
 // This function allows for the Google Map to be rendered as well as all markers to be created.
