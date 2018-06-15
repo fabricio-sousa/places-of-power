@@ -29,6 +29,7 @@
             <div class="starter-template">
                 <h2>Array Test</h2>
                 <hr class="mb-4">
+                <div id="map1" style="width: 100%; height: 400px"></div>
             </div>
         </main>
 
@@ -38,7 +39,12 @@
 		<!-- Bootstrap javascript -->		
 		<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
 		<script src="{{url_for('static', filename='popper.min.js')}}"></script>
-        <script src="{{url_for('static', filename='holder.min.js')}}"></script>        
+        <script src="{{url_for('static', filename='holder.min.js')}}"></script>
+        
+        <script>
+            Places = {{places}};
+            alert(Places);
+        </script>
     </body>
 
 
