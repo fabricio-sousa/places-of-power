@@ -142,18 +142,17 @@ function placetext(place) {
 // This is the ViewModel function connecting all views, model and user input functionalities.
 var ViewModel = function() {
 
-	var self = this;
-    this.search = ko.observable("");
-    var data;
-    var Places = [];
-
     $.ajax({
         dataType: "json",
         url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
         data: data,
         success: function (data) {
-            // begin accessing JSON data here
+            // begin accessing JSON data here            
+            var Places = [];
             Places = data['places'];
+            var self = this;
+            this.search = ko.observable("");
+            var data;
             // Filter Parks based on user input.
 	        this.listPlaces = ko.computed(function() {
 		        var search = self.search().toLowerCase();
