@@ -152,7 +152,6 @@ var ViewModel = function() {
             Places = data['places'];
             var self = this;
             this.search = ko.observable("");
-            var data;
             // Filter Parks based on user input.
 	        this.listPlaces = ko.computed(function() {
 		        var search = self.search().toLowerCase();
