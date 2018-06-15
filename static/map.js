@@ -4,7 +4,7 @@ var infoWindow;
 
 // Modal array built from async: false JSON request, fetching data from the backend.
 var Places = function() {
-    var data;
+    var places;
     $.ajax({
         dataType: "json",
         url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
@@ -13,10 +13,10 @@ var Places = function() {
         success: function (data) {
             // begin accessing JSON data here
             // For each place in Places, call the geocodePlace function which geocodes the addresses.
-            Places = data['places'];
+            places = data['places'];
         }
     });
-    return Places;
+    return places;
 }
     
 
