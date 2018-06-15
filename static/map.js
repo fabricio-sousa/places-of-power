@@ -38,12 +38,10 @@ function initMap() {
             
             // Declare a new infoWindow object.
             infoWindow = new google.maps.InfoWindow();
+            // Apply all KnockOut Bindings.
+            ko.applyBindings(new ViewModel());
         }
     });
-
-    // Apply all KnockOut Bindings.
-    ko.applyBindings(new ViewModel());
-
 }
 
 // This function allows each marker to be clicked triggering a google maps marker event.
@@ -148,13 +146,13 @@ var ViewModel = function() {
     this.search = ko.observable("");
     var data;
     var Places = [];
+
     $.ajax({
         dataType: "json",
         url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
         data: data,
         success: function (data) {
             // begin accessing JSON data here
-            // For each place in Places, call the geocodePlace function which geocodes the addresses.
             Places = data['places'];
             // Filter Parks based on user input.
 	        this.listPlaces = ko.computed(function() {
