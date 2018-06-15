@@ -40,6 +40,10 @@ function initMap() {
             infoWindow = new google.maps.InfoWindow();
         }
     });
+
+    // Apply all KnockOut Bindings.
+    ko.applyBindings(new ViewModel());
+
 }
 
 // This function allows each marker to be clicked triggering a google maps marker event.
@@ -135,6 +139,48 @@ function placetext(place) {
             '</h6)');
     };
 }
+
+
+// This is the ViewModel function connecting all views, model and user input functionalities.
+var ViewModel = function() {
+
+	var self = this;
+    this.search = ko.observable("");
+    
+    var Places = [];
+    $.ajax({
+        dataType: "json",
+        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+        data: data,
+        success: function (data) {
+            // begin accessing JSON data here
+            // For each place in Places, call the geocodePlace function which geocodes the addresses.
+            Places = data['places'];
+            // Filter Parks based on user input.
+	        this.listPlaces = ko.computed(function() {
+		        var search = self.search().toLowerCase();
+		        if (!search) {
+			        Places.forEach(function(place) {
+				        if (place.marker) {
+					        place.marker.setVisible(true);
+				        }
+			        });
+			        return Places;
+		        } else {
+			        return ko.utils.arrayFilter(Places, function(place) {
+		 		        var match = park.name.toLowerCase().indexOf(search) !== -1;
+		 		        if (match) {
+                            place.marker.setVisible(true);
+		 		        } else {
+                            place.marker.setVisible(false);
+		 		        }
+		 		        return match;
+		 	        });
+		        }
+	        });
+        }
+    });
+};
 
 // Google Maps API error handling.
 function apiError() {

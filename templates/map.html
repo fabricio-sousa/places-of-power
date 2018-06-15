@@ -42,13 +42,13 @@
 					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
 					
 					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
-						<ul class="list-group">
-							<a  href="#" class="list-group-item list-group-item-action"></a>
+						<ul data-bind="foreach: listPlaces" class="list-group">
+							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
 						</ul>
 					</div>
 					
 					<form class="form-inline my-2 my-lg-0"> <!-- Search for a Place -->
-						<input  class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
+						<input  data-bind="value: search, valueUpdate: 'input'" class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
 					</form>
 				</nav>
