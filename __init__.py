@@ -325,7 +325,7 @@ def editPlace(place_id):
                 </script><body onload='myFunction()'>'''
     if request.method == 'POST':
         if request.form['user_name']:
-            editedPlace.name = request.form['user_name']
+            editedPlace.user_name = request.form['user_name']
         if request.form['name']:
             editedPlace.name = request.form['name']
         if request.form['description']:
