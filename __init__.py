@@ -284,17 +284,10 @@ def addPlace():
 @app.route('/place/<int:place_id>/details')
 def showPlace(place_id):
     place = session.query(Place).filter_by(id=place_id).one()
-    creator = getUserInfo(place.user_id)
-    if ('username' 
-        not in login_session 
-        or creator.id != login_session['user_id']):
-        return render_template('publicplace.html',
-                               place=place,
-                               creator=creator)
+    if ('username' not in login_session ):
+        return render_template('publicplace.html', place=place)
     else:
-        return render_template('place.html',
-                               place=place,
-                               creator=creator)
+        return render_template('place.html', place=place)
 
 
 # Delete a Place of Power route decorator
