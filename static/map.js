@@ -146,7 +146,7 @@ var ViewModel = function() {
 
 	var self = this;
     this.search = ko.observable("");
-    
+    var data;
     var Places = [];
     $.ajax({
         dataType: "json",
