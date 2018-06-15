@@ -256,11 +256,9 @@ def showPlaces():
                                places=places)
 
 
-# Main page route decorator showing all Places of Power
-@app.route('/text/')
+@app.route('/test/')
 def test():
     places = session.query(Place).order_by(desc(Place.date))
-
     return render_template('test.html',places=places)
 
 
