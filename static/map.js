@@ -143,7 +143,19 @@ function placetext(place) {
 var ViewModel = function() {
 
 	var self = this;
-	this.search = ko.observable("");
+    this.search = ko.observable("");
+    var Places = [];
+    $.ajax({
+        dataType: "json",
+        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+        data: data,
+        async: false,
+        success: function (data) {
+            // begin accessing JSON data here
+            // For each place in Places, call the geocodePlace function which geocodes the addresses.
+            Places = data['places'];
+        }
+    });
 
 	// Filter Places based on user input.
 	this.listPlaces = ko.computed(function() {
