@@ -351,7 +351,14 @@ def editPlace(place_id):
 @app.route('/map/')
 def showMap():    
     return render_template('map.html')
-    
+
+
+# The Google Maps page route decorator
+@app.route('/maps/')
+def showMap():
+    return render_template('maps.html')
+
+
 
 # JSON APIs to feed Places info from database.
 @app.route('/place/json/')
