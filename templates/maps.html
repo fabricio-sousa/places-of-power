@@ -4,7 +4,7 @@
 
     <body>
         <!-- The Google Map -->
-        <div id="map" style="width: 100%; height: 400px"></div>
+        <div id="maps" style="width: 100%; height: 400px"></div>
         <script>
             $(document).ready(function() {
                 // Model Places array of 5 places with name and address.
@@ -51,7 +51,7 @@
 
                     // Constructor creates a new map.
                     map = new google.maps.Map(document.getElementById(
-                        'map'), {
+                        'maps'), {
                         center: {
                             lat: 29.976480,
                             lng: 31.131302
