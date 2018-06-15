@@ -164,7 +164,7 @@ var ViewModel = function() {
 			        return Places;
 		        } else {
 			        return ko.utils.arrayFilter(Places, function(place) {
-		 		        var match = park.name.toLowerCase().indexOf(search) !== -1;
+		 		        var match = place.name.toLowerCase().indexOf(search) !== -1;
 		 		        if (match) {
                             place.marker.setVisible(true);
 		 		        } else {
