@@ -1,10 +1,45 @@
-{% extends "main.html" %} {% block content %} {% include "header.html" %}
+<!DOCTYPE html>
 
-<main role="main" class="container">
-    <div class="starter-template">
-        <h2>Array Test</h2>
-        <hr class="mb-4">
-    </div>
-</main>
+<html lang="en">
 
-{% endblock %}
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<meta property="og:title" content="Places of Power">
+		<meta property="og:author" content="Fabricio Sousa">
+		<meta property="og:description" content="A collection of Places of Power around the world. View and add your own!">
+		<meta property="og:image" content="https://i.imgur.com/E4DZ4nH.jpg">
+		<meta property="og:url" content="http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com">
+
+		<title>Places of Power</title>
+		<link rel="shortcut icon" href="{{url_for('static', filename='pyramid.png')}}">
+		
+		<!-- Bootstrap core CSS -->
+		<link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap.min.css')}}">
+
+		<!-- Custom Styles -->
+		<link rel=stylesheet type=text/css href="{{url_for('static', filename='custom.css')}}">
+
+    </head>
+    
+    <body>
+        <main role="main" class="container">
+            <div class="starter-template">
+                <h2>Array Test</h2>
+                <hr class="mb-4">
+            </div>
+        </main>
+
+        <!-- Jquery javascript -->	
+		<script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}"></script>
+
+		<!-- Bootstrap javascript -->		
+		<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+		<script src="{{url_for('static', filename='popper.min.js')}}"></script>
+        <script src="{{url_for('static', filename='holder.min.js')}}"></script>        
+    </body>
+
+
+
