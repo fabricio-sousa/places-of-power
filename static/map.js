@@ -22,14 +22,16 @@ function initMap() {
 
     // Declare a new geocoder object.
     var geocoder = new google.maps.Geocoder();
-    var Places;
+    var data;
+    var Places = [];
     $.ajax({
         dataType: "json",
         url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
-        data: Places,
-        success: function (Places) {
+        data: data,
+        success: function (data) {
             // begin accessing JSON data here
             // For each place in Places, call the geocodePlace function which geocodes the addresses.
+            Places = data;
             Places.forEach(function(place) {
                 geocodePlace(geocoder, place, map);
             });
