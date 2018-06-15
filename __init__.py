@@ -350,7 +350,6 @@ def editPlace(place_id):
 # The Google Maps page route decorator
 @app.route('/map/')
 def showMap():
-    places = session.query(Place).order_by(desc(Place.date))
     return render_template('maps.html', places=places)
 
 
