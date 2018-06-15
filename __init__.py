@@ -355,7 +355,7 @@ def showMap():
 
 # The Google Maps page route decorator
 @app.route('/maps/')
-def showMap():
+def showMaps():
     return render_template('maps.html')
 
 
