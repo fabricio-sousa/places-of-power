@@ -20,7 +20,7 @@ function fetchPlaces() {
     return places;
 }
 
-fetchPlaces();
+Places = fetchPlaces();
 
 console.log(Places);
     
