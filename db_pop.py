@@ -17,6 +17,7 @@ session.commit()
 
 # Create fake categories
 Place1 = Place(name="The Great Pyramid of Giza",
+               user_name="The Great Pharaoh",
                date=datetime.datetime.now(),
                description="One of the 7 Wonders of the Ancient World. A place of magic and mystery.",
                lat="29.976480",
