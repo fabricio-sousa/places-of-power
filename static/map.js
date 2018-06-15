@@ -6,6 +6,7 @@ var infoWindow;
 // Modal array built from async: false JSON request, fetching data from the backend.
 function fetchPlaces() {
     var places;
+    var data;
     $.ajax({
         dataType: "json",
         url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
