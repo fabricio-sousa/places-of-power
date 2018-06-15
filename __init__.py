@@ -10,8 +10,7 @@ from sqlalchemy import create_engine, asc, desc, DateTime
 from sqlalchemy.orm import sessionmaker, scoped_session
 from db_setup import Base, User, Place
 from flask import session as login_session
-import random
-import string
+import random, string
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import httplib2
@@ -56,7 +55,7 @@ def login_required(f):
 
 
 # Create anti-forgery state token route decorator.
-@app.route('/login/')
+@app.route('/login')
 def showLogin():
 
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
@@ -67,7 +66,7 @@ def showLogin():
 
 
 # gconnect route decorator.
-@app.route('/gconnect/', methods=['POST'])
+@app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
     if request.args.get('state') != login_session['state']:
@@ -143,7 +142,7 @@ def gconnect():
     login_session['provider'] = 'google'
 
     # see if user exists, if it doesn't make a new one
-    user_id = getUserID(data["email"])
+    user_id = getUserID(login_session['email'])
     if not user_id:
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
@@ -188,7 +187,7 @@ def getUserID(email):
 
 
 # DISCONNECT - Revoke a current user's token and reset their login_session
-@app.route('/gdisconnect/')
+@app.route('/gdisconnect')
 def gdisconnect():
     # Only disconnect a connected user.
     access_token = login_session.get('access_token')
@@ -212,7 +211,7 @@ def gdisconnect():
 
 
 # Disconnect based on provider
-@app.route('/disconnect/')
+@app.route('/disconnect')
 def disconnect():
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
@@ -238,13 +237,13 @@ def Main():
 
 
 # The Help Page route decorator.
-@app.route('/help/')
+@app.route('/help')
 def showHelp():
     return render_template('help.html')
 
 
 # Main page route decorator showing all Places of Power
-@app.route('/place/')
+@app.route('/place')
 def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
 
@@ -257,9 +256,11 @@ def showPlaces():
 
 
 # Add a new Place of Power route decorator
-@app.route('/place/new/', methods=['GET', 'POST'])
+@app.route('/place/new', methods=['GET', 'POST'])
 @login_required
 def addPlace():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         newPlace = Place(
             name=request.form['name'],
@@ -278,8 +279,8 @@ def addPlace():
 
 
 # Shows details of a Place of Power route decorator
-@app.route('/place/<int:place_id>/')
-@app.route('/place/<int:place_id>/details/')
+@app.route('/place/<int:place_id>')
+@app.route('/place/<int:place_id>/details')
 def showPlace(place_id):
     place = session.query(Place).filter_by(id=place_id).one()
     creator = getUserInfo(place.user_id)
@@ -296,7 +297,7 @@ def showPlace(place_id):
 
 
 # Delete a Place of Power route decorator
-@app.route('/place/<int:place_id>/delete/', methods=['GET', 'POST'])
+@app.route('/place/<int:place_id>/delete', methods=['GET', 'POST'])
 @login_required
 def deletePlace(place_id):
     placeToDelete = session.query(
@@ -318,7 +319,7 @@ def deletePlace(place_id):
 
 
 # Edit details of a Place of Power route decorator
-@app.route('/place/<int:place_id>/edit/', methods=['GET', 'POST'])
+@app.route('/place/<int:place_id>/edit', methods=['GET', 'POST'])
 @login_required
 def editPlace(place_id):
     editedPlace = session.query(
@@ -348,13 +349,13 @@ def editPlace(place_id):
 
 
 # The Google Maps page route decorator
-@app.route('/map/')
+@app.route('/map')
 def showMap():
     return render_template('map.html')
 
 
 # JSON APIs to feed Places info from database.
-@app.route('/json/')
+@app.route('/json')
 def placesJSON():
     places = session.query(Place).all()
     return jsonify(places=[r.serialize for r in places])
