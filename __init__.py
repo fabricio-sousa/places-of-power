@@ -363,7 +363,7 @@ def showMap():
 @app.route('/place/json/')
 def placesJSON():
     places = session.query(Place).all()
-    return jsonify(array=places)
+    return jsonify(places=[r.serialize for r in places])
 
 
 if __name__ == '__main__':
