@@ -25,33 +25,20 @@
 	
 	<body>
 		
-			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-					<a class="navbar-brand" href="{{url_for('showPlaces')}}">Places of Power</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					
-					<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-						<ul class="navbar-nav mr-auto">
-							<li class="nav-item active">
-								<a class="nav-link" href="{{url_for('addPlace')}}">Add a Place</a>
-							</li>
-						</ul>
+			<!-- Navbar with the Search feature. -->
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<form class="navbar-form navbar-right" role="search">
+					<div class="input-group">
+						<input data-bind="value: search, valueUpdate: 'input'" class="form-control" placeholder="Search for a Park" type="text">
+						<div class="input-group-btn">
+							<button class="btn btn-default" <i class="glyphicon glyphicon-search"></i>Search</button>
+						</div>
 					</div>
-					
-					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
-					
-					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
-						<ul data-bind="foreach: listPlaces" class="list-group">
-							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
-						</ul>
-					</div>
-					
-					<form class="form-inline my-2 my-lg-0"> <!-- Search for a Place -->
-						<input  data-bind="value: search, valueUpdate: 'input'" class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
-					</form>
-				</nav>
+				</form>
+			</div>
+		</nav>
 				
 				<!-- The Google Map -->
 				<main role="main" class="container">
@@ -59,6 +46,17 @@
 						<div id="map"></div>
 					</div>
 				</main>
+
+				<!-- Side bar with the list of parks. -->
+				<aside class="col-md-3 col-md-offset-9 collapsed in" id="navbarSupportedContent">
+					<div class="sidenav">
+						<ul data-bind="foreach: listPlaces" class="list-group">
+								<a  href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
+						</ul>
+  				</div>
+				</aside>
+			</div>
+		</main>
 
 		<!-- KnockoutJS lib -->
 		<script src="{{url_for('static', filename='knockout.js')}}"></script>
