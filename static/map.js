@@ -2,6 +2,24 @@
 var markers = [];
 var infoWindow;
 
+// Modal array built from async: false JSON request, fetching data from the backend.
+var Places = function() {
+    var data;
+    $.ajax({
+        dataType: "json",
+        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+        data: data,
+        async: false,
+        success: function (data) {
+            // begin accessing JSON data here
+            // For each place in Places, call the geocodePlace function which geocodes the addresses.
+            Places = data['places'];
+        }
+    });
+    return Places;
+}
+    
+
 // This function allows for the Google Map to be rendered as well as all markers to be created.
 function initMap() {
 
@@ -22,26 +40,16 @@ function initMap() {
 
     // Declare a new geocoder object.
     var geocoder = new google.maps.Geocoder();
-    var data;
-    var Places = [];
-    $.ajax({
-        dataType: "json",
-        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
-        data: data,
-        success: function (data) {
-            // begin accessing JSON data here
-            // For each place in Places, call the geocodePlace function which geocodes the addresses.
-            Places = data['places'];
-            Places.forEach(function(place) {
-                geocodePlace(geocoder, place, map);
-            });
-            
-            // Declare a new infoWindow object.
-            infoWindow = new google.maps.InfoWindow();
-            // Apply all KnockOut Bindings.
-            ko.applyBindings(new ViewModel());
-        }
+
+    // For each place in Places, call the geocodePlace function which geocodes the addresses.
+    Places.forEach(function(place) {
+        geocodePlace(geocoder, place, map);
     });
+    
+    // Declare a new infoWindow object.
+    infoWindow = new google.maps.InfoWindow();
+    // Apply all KnockOut Bindings.
+    ko.applyBindings(new ViewModel());
 }
 
 // This function allows each marker to be clicked triggering a google maps marker event.
@@ -144,20 +152,7 @@ var ViewModel = function() {
 
 	var self = this;
     this.search = ko.observable("");
-    var Places = [];
-    var data;
-    $.ajax({
-        dataType: "json",
-        url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
-        data: data,
-        async: false,
-        success: function (data) {
-            // begin accessing JSON data here
-            // For each place in Places, call the geocodePlace function which geocodes the addresses.
-            Places = data['places'];
-        }
-    });
-
+    
 	// Filter Places based on user input.
 	this.listPlaces = ko.computed(function() {
 		var search = self.search().toLowerCase();
