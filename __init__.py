@@ -264,13 +264,13 @@ def addPlace():
         return redirect('/login')
     if request.method == 'POST':
         newPlace = Place(
+            user_name=request.form['user_name'],
             name=request.form['name'],
             description=request.form['description'],
             picture_url=request.form['picture_url'],
             lat=request.form['lat'],
             lng=request.form['lng'],
-            date=datetime.now(),
-            user_name=login_session['username'])
+            date=datetime.now())
         session.add(newPlace)
         flash('New Details for %s Successfully Added!' % newPlace.name)
         session.commit()
@@ -324,6 +324,8 @@ def editPlace(place_id):
                 Please add your own Place of Power!');}
                 </script><body onload='myFunction()'>'''
     if request.method == 'POST':
+        if request.form['user_name']:
+            editedPlace.name = request.form['user_name']
         if request.form['name']:
             editedPlace.name = request.form['name']
         if request.form['description']:

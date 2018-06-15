@@ -25,7 +25,7 @@ class Place(Base):
     lat = Column(String(250), nullable=False)
     lng = Column(String(250), nullable=False)
     picture_url = Column(String(250), nullable=False)
-    user_name = Column(Integer, ForeignKey('user.name'))
+    user_name = Column(String(255), nullable = False)
     user_id = Column(Integer, ForeignKey('user.id'))
     user = relationship(User)
 
