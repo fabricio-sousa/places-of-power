@@ -231,7 +231,7 @@ def disconnect():
 
 
 # Main landing page for Places of Power
-@app.route('/')
+@app.route('/main')
 def Main():    
     return render_template('index.html')
 
@@ -243,6 +243,7 @@ def showHelp():
 
 
 # Main page route decorator showing all Places of Power
+@app.route('/')
 @app.route('/place')
 def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
