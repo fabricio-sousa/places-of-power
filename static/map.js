@@ -22,8 +22,6 @@ function fetchPlaces() {
 }
 
 Places = fetchPlaces();
-
-console.log(Places);
     
 
 // This function allows for the Google Map to be rendered as well as all markers to be created.
