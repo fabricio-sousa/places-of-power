@@ -351,7 +351,7 @@ def editPlace(place_id):
 @app.route('/map/')
 def showMap():
     places = session.query(Place).order_by(desc(Place.date))
-    return render_template('maps.html')
+    return render_template('maps.html', places=places)
 
 
 # JSON APIs to feed Places info from database.
