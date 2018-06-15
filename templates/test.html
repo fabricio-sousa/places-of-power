@@ -42,13 +42,17 @@
         <script src="{{url_for('static', filename='holder.min.js')}}"></script>
         
         <script>
-            $.getJSON( "http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/", function( data ) {
-                console.log('loaded');
-                var Places = []; // create array here
-                $.each(data.Places, function (index, Places) {
-                    Places.push(Places); //push values here
+            $(document).ready(function () {
+                var data;
+                $.ajax({
+                    dataType: "json",
+                    url: 'http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/json/',
+                    data: data,
+                    success: function (data) {
+                        // begin accessing JSON data here
+                        console.log(data);
+                    }
                 });
-                console.log(Places); // see the output here
             });
         </script>
     </body>
