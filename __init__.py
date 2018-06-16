@@ -277,7 +277,6 @@ def addPlace():
 # Shows details of a Place of Power route decorator
 @app.route('/place/<int:place_id>')
 @app.route('/place/<int:place_id>/details')
-@login_required
 def showPlace(place_id):
     place = session.query(Place).filter_by(id=place_id).one()
     if login_session['user_id'] != place.user_id:
