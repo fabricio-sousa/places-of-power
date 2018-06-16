@@ -1,10 +1,10 @@
-# Project Places of Power (In production)
+# Project Places of Power (Portfolio Demo)
 
 #### Developer: Fabricio Sousa
 
 ## Description
 
-This is a RESTful web app created via Python and the Flask framework, SQLAlchemy, along with third-party Google OAuth authentication, backed by a PostgreSQL database. Users can login in order to create, read, update and delete their own Places of Power. It will eventually serve those places to the frontend web app that will render those places as markers on World Google Map. Front end features KnockoutJS, JQuery, HTML5 and CSS. Markers on the Google Map will feature InfoWindows containing content served by the backend, as well as from Wikipedia's API.
+This project serves as a demonstration of everything I've mastered so far in my Full Stack Development education. This is a RESTful web app with a backend developed with Python and the Flask framework, SQLAlchemy, along with third-party Google OAuth authentication, a PostgreSQL database and deployed to an Amazon Lightsail Ubuntu Linux instance running Apache. Users can login in order to create, read, update and delete their own Places of Power (CRUD operations). A json router app decorator allows for the data to be served to the frontend, which renders those places as markers on World Google Map. The frontend features KnockoutJS, JQuery, HTML5 and CSS. Markers on the Google Map feature InfoWindows containing content served by the backend, as well possibly adding further 3rd party API integration to provide more content.
 
 ## Frameworks, Libraries, and APIs
 
