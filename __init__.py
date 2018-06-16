@@ -296,7 +296,7 @@ def showPlace(place_id):
 def deletePlace(place_id):
     placeToDelete = session.query(
         Place).filter_by(id=place_id).one()
-    if 'username' not in login_session:
+    if placeToDelete.user_id != login_session['user_id']:
         return render_template('unauth.html')
     if request.method == 'POST':
         session.delete(placeToDelete)
