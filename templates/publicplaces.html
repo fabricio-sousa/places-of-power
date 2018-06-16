@@ -18,7 +18,7 @@
 		<a href="{{url_for('addPlace')}}">
 			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
 		</a>
-		<hr class="mb-3">	
+		<br class="mb-3">	
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
 			<h4>{{place.name}}</h4>
