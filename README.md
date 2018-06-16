@@ -1,7 +1,7 @@
 # Project Places of Power (Portfolio Demo)
 
 #### Developer: Fabricio Sousa
-#### Live Version: (http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/)
+#### Live Version: http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/main
 
 ## Description
 
@@ -37,5 +37,5 @@ Javascript, KnockoutJS, jQuery, Bootstrap, the Google Maps API, Wikipedia's API 
 ## Installation and How To Run
 
 1. Clone repo into your Apache environment on Linux/Ubuntu.
-2. Access the live version [here](http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/).
+2. Access the live version [here](http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/main).
 
