@@ -126,9 +126,9 @@ function geocodePlace(geocoder, place, placesMap) {
                     map.setCenter(center);
                 });
 
-        } else {
-            alert('This location has an invalid address.');
-        }
+        } //else {
+            //alert('This location has an invalid address.');
+        //}
     });
 }
 
