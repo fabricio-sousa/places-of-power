@@ -302,7 +302,7 @@ def deletePlace(place_id):
         session.delete(placeToDelete)
         session.commit()
         flash('%s Successfully Deleted!' % (placeToDelete.name))
-        return redirect(url_for('showPlaces', place_id=place_id))
+        return redirect(url_for('showPlaces'))
     else:
         return render_template('deleteplace.html',
                                place=placeToDelete)
@@ -334,7 +334,7 @@ def editPlace(place_id):
         session.commit()
         
         flash('Place of Power has been successfully updated!')
-        return redirect(url_for('showPlaces', place_id=place_id))
+        return redirect(url_for('showPlaces'))
     else:
         return render_template('editplace.html',
                                 place_id=place_id,
