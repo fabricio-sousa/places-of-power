@@ -296,7 +296,7 @@ def showPlace(place_id):
 def deletePlace(place_id):
     placeToDelete = session.query(
         Place).filter_by(id=place_id).one()
-    if placeToDelete.user_id != login_session['user_id']:
+    if login_session['user_id'] != placeToDelete.user_id:
         return render_template('unauth.html')
     if request.method == 'POST':
         session.delete(placeToDelete)
@@ -314,7 +314,7 @@ def deletePlace(place_id):
 def editPlace(place_id):
     editedPlace = session.query(
         Place).filter_by(id=place_id).one()
-    if editedPlace.user_id != login_session['user_id']:
+    if login_session['user_id'] != editedPlace.user_id:
         return render_template('unauth.html')
     if request.method == 'POST':
         if request.form['user_name']:
