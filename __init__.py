@@ -315,7 +315,7 @@ def editPlace(place_id):
     editedPlace = session.query(
         Place).filter_by(id=place_id).one()
     if editedPlace.user_id != login_session['user_id']:
-        return render_template('nosignin.html')
+        return render_template('unauth.html')
     if request.method == 'POST':
         if request.form['user_name']:
             editedPlace.user_name = request.form['user_name']
