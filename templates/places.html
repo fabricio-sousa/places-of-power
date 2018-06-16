@@ -17,9 +17,9 @@
 		<a href="{{url_for('addPlace')}}">
 			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
 		</a>			
-		<br class="mb-4">
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
+			<br class="mb-4">
 			<h4>{{place.name}}</h4>
 		</a>
 		<h8>Added by {{place.user_name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}</h8>
