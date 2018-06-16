@@ -242,10 +242,8 @@ def showHelp():
 # Main page route decorator showing all Places of Power
 @app.route('/')
 @app.route('/place')
-@login_required
 def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
-
     if 'username' not in login_session:
         return render_template('publicplaces.html',
                                places=places)
