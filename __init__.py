@@ -304,7 +304,7 @@ def deletePlace(place_id):
     if request.method == 'POST':
         session.delete(placeToDelete)
         session.commit()
-        flash('%s Successfully Deleted!' % placeToDelete.name)
+        flash('%s Successfully Deleted!' % (placeToDelete.name))
         return redirect(url_for('showPlaces', place_id=place_id))
     else:
         return render_template('deleteplace.html',
