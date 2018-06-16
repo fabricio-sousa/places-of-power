@@ -14,10 +14,8 @@
 		<a href="{{url_for('showMap')}}"><button class="btn btn-lg btn-outline-secondary" type="button">World Map of Places of Power</button></a>
 		<hr class="mb-4">
 		<h2>Latest Places</h2>	
-		<hr class="mb-3">
-		<a href="{{url_for('addPlace')}}">
-			<button class="btn btn-sm btn-outline-secondary" type="button">Add Place</button>
-		</a>
+		<br class="mb-3">
+		<h5>To add your own Place of Power, please Log In above!</h5>
 		<br class="mb-4">	
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">

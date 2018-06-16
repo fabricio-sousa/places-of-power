@@ -62,7 +62,7 @@ def showLogin():
                     for x in xrange(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
-    return render_template('login.html', STATE=state)
+    return render_template('signin.html', STATE=state)
 
 
 # User Helper Functions
@@ -242,6 +242,7 @@ def showHelp():
 # Main page route decorator showing all Places of Power
 @app.route('/')
 @app.route('/place')
+@login_required
 def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
 
