@@ -10,7 +10,8 @@
 			{% endfor %}
 			{% endif %}
 			{% endwith %}
-		</div>
+        </div>
+        <a href="{{url_for('showMap')}}"><button class="btn btn-lg btn-outline-secondary" type="button">World Map of Places of Power</button></a>
         <h2>{{place.name}}</h2>
         <img src="{{place.picture_url}}" class="img-fluid img-thumbnail" alt="Picture of a Place of Power" height="500" width="500">
         <hr class="mb-4">
@@ -18,8 +19,6 @@
         <br class="mb-1">
         <h6><strong>Latitude and Longitude:</strong> {{place.lat}}, {{place.lng}}</h6>
         <h6>Added by {{place.user_name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}.</h6>
-        <hr class="mb-1">
-        <a href="{{url_for('showMap')}}"><button class="btn btn-lg btn-outline-secondary" type="button">World Map of Places of Power</button></a>
         
     </div>
 </main>
