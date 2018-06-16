@@ -279,20 +279,20 @@ def addPlace():
 @app.route('/place/<int:place_id>/details')
 def showPlace(place_id):
     place = session.query(Place).filter_by(id=place_id).one()
-    #if login_session['user_id'] != place.user_id:
-        #return render_template('publicplace.html', place=place)
-    #else:
-    return render_template('place.html', place=place)
+    if login_session['user_id'] != place.user_id:
+        return render_template('publicplace.html', place=place)
+    else:
+        return render_template('place.html', place=place)
 
 
 # Delete a Place of Power route decorator
 @app.route('/place/<int:place_id>/delete', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def deletePlace(place_id):
     placeToDelete = session.query(
         Place).filter_by(id=place_id).one()
-    #if login_session['user_id'] != placeToDelete.user_id:
-        #return render_template('unauth.html')
+    if login_session['user_id'] != placeToDelete.user_id:
+        return render_template('unauth.html')
     if request.method == 'POST':
         session.delete(placeToDelete)
         session.commit()
