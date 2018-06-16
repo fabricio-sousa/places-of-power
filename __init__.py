@@ -297,10 +297,7 @@ def deletePlace(place_id):
     placeToDelete = session.query(
         Place).filter_by(id=place_id).one()
     if placeToDelete.user_id != login_session['user_id']:
-        return '''<script>function myFunction()
-                {alert('You are not authorized to delete this place.
-                Please add your own Place of Power!');}
-                </script><body onload='myFunction()'>'''
+        return render_template('unauth.html')
     if request.method == 'POST':
         session.delete(placeToDelete)
         session.commit()
@@ -318,10 +315,7 @@ def editPlace(place_id):
     editedPlace = session.query(
         Place).filter_by(id=place_id).one()
     if editedPlace.user_id != login_session['user_id']:
-        return '''<script>function myFunction()
-                {alert('You are not authorized to edit this place.
-                Please add your own Place of Power!');}
-                </script><body onload='myFunction()'>'''
+        return render_template('nosignin.html')
     if request.method == 'POST':
         if request.form['user_name']:
             editedPlace.user_name = request.form['user_name']
