@@ -39,7 +39,6 @@ class Place(Base):
             'lat'           : self.lat,
             'lng'           : self.lng,
             'picture_url'   : self.picture_url,
-            'date'          : self.date,
             'user_name'     : self.user_name
         }
 
