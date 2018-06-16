@@ -244,11 +244,7 @@ def showHelp():
 @app.route('/place')
 def showPlaces():
     places = session.query(Place).order_by(desc(Place.date))
-    if 'username' not in login_session:
-        return render_template('publicplaces.html',
-                               places=places)
-    else:
-        return render_template('places.html',
+    return render_template('places.html',
                                places=places)
 
 
