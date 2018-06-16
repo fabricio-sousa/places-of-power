@@ -2,90 +2,165 @@
 
 <html lang="en">
 
-	<head>
+<head>
 
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-		<meta property="og:title" content="Places of Power" />
-		<meta property="og:type" content="website" />
-		<meta property="og:author" content="Fabricio Sousa" />
-		<meta property="og:description" content="A collection of Places of Power around the world. View and add your own!" />
-		<meta property="og:image" content="https://i.imgur.com/E4DZ4nH.jpg" />
-		<meta property="og:url" content="http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/main" />
+    <meta property="og:title" content="Places of Power" />
+    <meta property="og:type" content="website" />
+    <meta property="og:author" content="Fabricio Sousa" />
+    <meta property="og:description" content="A collection of Places of Power around the world. View and add your own!"
+    />
+    <meta property="og:image" content="https://i.imgur.com/E4DZ4nH.jpg" />
+    <meta property="og:url" content="http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/main"
+    />
 
-		<title>Places of Power</title>
-        <link rel="shortcut icon" href="{{url_for('static', filename='pyramid.png')}}">
-        
-        <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
-        <script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}">
-        </script>
-        <script src="//apis.google.com/js/platform.js?onload=start"> </script>
-        <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
-		
-		<!-- Bootstrap core CSS -->
-		<link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <title>Places of Power</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='pyramid.png')}}">
 
-		<!-- Custom Styles -->
-		<link rel=stylesheet type=text/css href="{{url_for('static', filename='custom.css')}}">
+    <!--Load Requirements for Google Sign In -->
+    <script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}">
+    </script>
+    <script src="//apis.google.com/js/platform.js?onload=start">
+    </script>
+    <!-- End of Requirements for Google Sign In -->
 
-	</head>
-	
-	<body>
-		
-		<main role="main" class="container">
-            <div class="starter-template">
-                <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+    <!-- Bootstrap core CSS -->
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap.min.css')}}">
 
-                <div id="signinButton">
-                    <span class="g-signin"
-                          data-scope="openid email"
-                          data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com"
-                          data-redirecturi="postmessage"
-                          data-accesstype="offline"
-                          data-cookiepolicy="single_host_origin"
-                          data-callback="signInCallback"
-                          data-approvalprompt="force">
+    <!-- Custom Styles -->
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='custom.css')}}">
+
+</head>
+
+<body>
+
+    <main role="main" class="container">
+        <div class="starter-template">
+            <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+
+            <!--Google Sign In -->
+            <div id="signinButton">
+                <span class="g-signin" data-scope="openid email" data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com"
+                    data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
+                    data-callback="signInCallback" data-approvalprompt="force">
                     </span>
-                </div>
-                  
-                <div id="result"></div>
             </div>
-        </main>
+            <!-- End of Google Sign In -->
 
-		<!-- Bootstrap javascript -->		
-		<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
-		<script src="{{url_for('static', filename='popper.min.js')}}"></script>
-        <script src="{{url_for('static', filename='holder.min.js')}}"></script>
-        <script>
-            function signInCallback(authResult) {
-              if (authResult['code']) {
+            <!-- Facebook Signin -->
+            <button>
+                <fb:login-button scope="public_profile,email" onlogin="sendTokenToServer();">
+                    <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+                </fb:login-button>
+            </button>
+            <!-- End of Facebook Signin -->
+
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <!-- Bootstrap javascript -->
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='holder.min.js')}}"></script>
+
+    <!-- Google Sign In -->
+    <script>
+        function signInCallback(authResult) {
+            if (authResult['code']) {
                 // Hide the sign-in button now that the user is authorized
                 $('#signinButton').attr('style', 'display: none');
                 // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
                 $.ajax({
-                  type: 'POST',
-                  url: '/gconnect?state={{STATE}}',
-                  processData: false,
-                  data: authResult['code'],
-                  contentType: 'application/octet-stream; charset=utf-8',
-                  success: function(result) {
-                    // Handle or verify the server response if necessary.
-                    if (result) {
-                      $('#result').html(result + '<h2 class="h3 mb-3 font-weight-normal">Retrieving the latest Places of Power...</h2>')
-                     setTimeout(function() {
-                      window.location.href = "/place";
-                     }, 4000);
-                  } else if (authResult['error']) {
-                console.log('There was an error: ' + authResult['error']);
-              } else {
-                    $('#result').html('Failed to make a server-side call. Check your configuration and console.');
-                     }
-                  }
-              }); } }
-            </script>
+                    type: 'POST',
+                    url: '/gconnect?state={{STATE}}',
+                    processData: false,
+                    data: authResult['code'],
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function(result) {
+                        // Handle or verify the server response if necessary.
+                        if (result) {
+                            $('#result').html(result +
+                                '<h2 class="h3 mb-3 font-weight-normal">Retrieving the latest Places of Power...</h2>'
+                            )
+                            setTimeout(function() {
+                                window.location.href =
+                                    "/place";
+                            }, 4000);
+                        } else if (authResult['error']) {
+                            console.log('There was an error: ' +
+                                authResult['error']);
+                        } else {
+                            $('#result').html(
+                                'Failed to make a server-side call. Check your configuration and console.'
+                            );
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+    <!-- End of Google Sign In -->
+    
+    <!-- Facebook Signin -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: 'PASTE_YOUR_APP_ID_HERE',
+                cookie: true, // enable cookies to allow the server to access
+                // the session
+                xfbml: true, // parse social plugins on this page
+                version: 'v2.8' // use version 2.8
+            });
+        };
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function sendTokenToServer() {
+            var access_token = FB.getAuthResponse()['accessToken'];
+            console.log(access_token)
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Successful login for: ' + response.name);
+                $.ajax({
+                    type: 'POST',
+                    url: '/fbconnect?state={{STATE}}',
+                    processData: false,
+                    data: access_token,
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function(result) {
+                        // Handle or verify the server response if necessary.
+                        if (result) {
+                            $('#result').html(
+                                'Login Successful!</br>' +
+                                result +
+                                '</br>Redirecting...')
+                            setTimeout(function() {
+                                window.location.href =
+                                    "/restaurant";
+                            }, 4000);
+                        } else {
+                            $('#result').html(
+                                'Failed to make a server-side call. Check your configuration and console.'
+                            );
+                        }
+                    }
+                });
+            });
+        }
+    </script>  
+    <!-- End of Facebook Signin -->
 
-	</body>
-	
+</body>
+
 </html>
-
