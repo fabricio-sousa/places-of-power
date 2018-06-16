@@ -257,8 +257,6 @@ def showPlaces():
 @app.route('/place/new', methods=['GET', 'POST'])
 @login_required
 def addPlace():
-    if 'username' not in login_session:
-        return redirect('/login')
     if request.method == 'POST':
         newPlace = Place(
             user_name=request.form['user_name'],
@@ -267,7 +265,8 @@ def addPlace():
             picture_url=request.form['picture_url'],
             lat=request.form['lat'],
             lng=request.form['lng'],
-            date=datetime.now())
+            date=datetime.now(),
+            user_id=login_session['user_id'])
         session.add(newPlace)
         flash('New Details for %s Successfully Added!' % newPlace.name)
         session.commit()
