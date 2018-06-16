@@ -18,7 +18,7 @@
         <link rel="shortcut icon" href="{{url_for('static', filename='pyramid.png')}}">
         
         <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+        <script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}">
         </script>
         <script src="//apis.google.com/js/platform.js?onload=start"> </script>
         <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
@@ -35,7 +35,6 @@
 		
 		<main role="main" class="container">
             <div class="starter-template">
-                <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
                 <h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
 
                 <div id="signinButton">
