@@ -280,9 +280,9 @@ def addPlace():
 def showPlace(place_id):
     place = session.query(Place).filter_by(id=place_id).one()
     #if login_session['user_id'] != place.user_id:
-        return render_template('publicplace.html', place=place)
-    else:
-        return render_template('place.html', place=place)
+        #return render_template('publicplace.html', place=place)
+    #else:
+    return render_template('place.html', place=place)
 
 
 # Delete a Place of Power route decorator
