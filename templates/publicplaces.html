@@ -22,7 +22,8 @@
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
 			<h4>{{place.name}}</h4>
 		</a>
-		<h8>Added by {{place.user_name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}</h8>		
+		<h8>Added by {{place.user_name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}</h8>
+		<br class="mb-2">		
 		{% endfor %}
 	</div>
 </main>
