@@ -62,7 +62,7 @@ def showLogin():
                     for x in xrange(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
-    return render_template('signin.html', STATE=state)
+    return render_template('login.html', STATE=state)
 
 
 # gconnect
@@ -78,7 +78,7 @@ def gconnect():
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets(client_secret, scope='')
+        oauth_flow = flow_from_clientsecrets(client_secrets, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
@@ -153,11 +153,11 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += '''"style = "width: 200px;
-                            height: 200px;border-radius: 150px;
+    output += '''"style = "width: 300px;
+                            height: 300px;border-radius: 150px;
                             -webkit-border-radius: 150px;
                             -moz-border-radius: 150px;">'''
-    flash("Hello, %s" % login_session['username'])
+    flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
 
@@ -183,50 +183,6 @@ def getUserID(email):
         return user.id
     except:
         return None
-
-
-# DISCONNECT - Revoke a current user's token and reset their login_session
-@app.route('/gdisconnect')
-def gdisconnect():
-    # Only disconnect a connected user.
-    access_token = login_session.get('access_token')
-    if access_token is None:
-        response = make_response(
-            json.dumps('Current user not connected.'), 401)
-        response.headers['Content-Type'] = 'application/json'
-        return response
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % access_token
-    h = httplib2.Http()
-    result = h.request(url, 'GET')[0]
-    if result['status'] == '200':
-        response = make_response(json.dumps('Successfully disconnected.'), 200)
-        response.headers['Content-Type'] = 'application/json'
-        return response
-    else:
-        response = make_response(
-            json.dumps('Failed to revoke token for given user.', 400))
-        response.headers['Content-Type'] = 'application/json'
-        return response
-
-
-# Disconnect based on provider
-@app.route('/disconnect')
-def disconnect():
-    if 'provider' in login_session:
-        if login_session['provider'] == 'google':
-            gdisconnect()
-            del login_session['gplus_id']
-            del login_session['access_token']
-        del login_session['username']
-        del login_session['email']
-        del login_session['picture']
-        del login_session['user_id']
-        del login_session['provider']
-        flash("You have successfully been logged out.")
-        return redirect(url_for('showPlaces'))
-    else:
-        flash("You were not logged in")
-        return redirect(url_for('showPlaces'))
 
 
 
