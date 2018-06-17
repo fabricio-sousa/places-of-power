@@ -145,7 +145,7 @@ function placetext(place) {
         // Set the content of the ajax query to the infoWindow.
         infoWindow.setContent('<div class="container"><div class="card" style="width:400px"><div class="card-body"><h4 class="card-title">'
         + place.name + '</h4><p class="card-text">' + place.description + '</p><h6>Added by ' +  place.user_name + 
-        '</h6></div><img class="card-img-bottom" src=' + picture_url + 'alt="Place Image" style="width:100%"></div></div>');
+        '</h6></div><img class="card-img-bottom" src=' + place.picture_url + 'alt="Place Image" style="width:100%"></div></div>');
     };
 }
 
