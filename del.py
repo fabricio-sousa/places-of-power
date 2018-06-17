@@ -9,24 +9,27 @@ DBSession = scoped_session(sessionmaker(bind=engine))
 session = DBSession()
 
 '''
-place_del = session.query(Place).filter_by(id=6).one()
-session.delete(place_del)
+place = session.query(Place).filter_by(id=6).one()
+session.delete(place)
 session.commit()
 '''
 
 '''
-user_del = session.query(User).filter_by(id=6).one()
-session.delete(place_del)
+user = session.query(User).filter_by(id=6).one()
+session.delete(user)
 session.commit()
 '''
 
 # print "Place and User deleted!"
 
 
-users = session.query(User).all
+user = session.query(User).filter_by(id=2).one()
 
-for user in users:
-    print user.id
+print user['user']
+
+
+
+
 
 
 
