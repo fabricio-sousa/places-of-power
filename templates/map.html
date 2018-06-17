@@ -26,13 +26,17 @@
 	<body>
 		
 			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-					<a class="navbar-brand" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>Places of Power</a>
+
+					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>					
+					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
+						<ul data-bind="foreach: listPlaces" class="list-group">
+							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
+						</ul>
+					</div>
+
+					<a class="navbar-brand" href="{{url_for('showMap')}}">Places of Power</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-							<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
-								<ul data-bind="foreach: listPlaces" class="list-group">
-									<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
-								</ul>
-							</div>
+						<span class="navbar-toggler-icon"></span>
 					</button>
 					
 					<div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -54,7 +58,15 @@
 							{% endif %}
 
 						</ul>
-					</div>					
+					</div>
+					
+					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
+					
+					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
+						<ul data-bind="foreach: listPlaces" class="list-group">
+							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
+						</ul>
+					</div>
 					
 					<form class="form-inline my-2 my-lg-0"> <!-- Search for a Place -->
 						<input  data-bind="value: search, valueUpdate: 'input'" class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
