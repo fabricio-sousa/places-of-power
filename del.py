@@ -19,6 +19,6 @@ session.delete(place_del)
 session.commit()
 '''
 
-Print "Place and User deleted!"
+print "Place and User deleted!"
 
 
