@@ -8,10 +8,11 @@ Base.metadata.bind = engine
 DBSession = scoped_session(sessionmaker(bind=engine))
 session = DBSession()
 
-
+'''
 place_del = session.query(Place).filter_by(id=6).one()
 session.delete(place_del)
 session.commit()
+'''
 
 '''
 user_del = session.query(User).filter_by(id=6).one()
@@ -19,6 +20,14 @@ session.delete(place_del)
 session.commit()
 '''
 
-print "Place and User deleted!"
+# print "Place and User deleted!"
+
+
+users = session.query(User).all
+
+for user in users:
+    print user
+
+
 
 
