@@ -224,7 +224,7 @@ def disconnect():
         return redirect(url_for('showPlaces'))
     else:
         flash("You were not logged in")
-        return redirect(url_for('showPlaces'))
+        return redirect(url_for('showMap'))
 
 
 # Main landing page for Places of Power
