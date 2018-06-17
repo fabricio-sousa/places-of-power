@@ -26,7 +26,7 @@ session.commit()
 users = session.query(User).all
 
 for user in users:
-    print user
+    print user.id
 
 
 
