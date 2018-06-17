@@ -13,7 +13,7 @@
 		</div>
 		<a href="{{url_for('showMap')}}"><button class="btn btn-lg btn-outline-secondary" type="button">World Map of Places of Power</button></a>
 		<hr class="mb-4">
-		<h1>Latest Places of Power</h1>			
+		<h3>Latest Places of Power</h3>			
 		{% for place in places %}
 		<a href = "{{url_for('showPlace', place_id = place.id)}}">
 			<br class="mb-4">
