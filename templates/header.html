@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 
-	<a class="navbar-brand" href="{{url_for('showPlaces')}}">Places of Power</a>
+	<a class="navbar-brand" href="{{url_for('showMap')}}">Places of Power</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -10,7 +10,7 @@
 			
 			<li class="nav-item active">
 				{%if 'username' not in session %}
-				<a class="nav-link" href="{{url_for('showLogin')}}">Login</a>
+				<a class="nav-link" href="{{url_for('showLogin')}}">Add a Place of Power</a>
 				{% else %}
 				<a class="nav-link" href="{{url_for('disconnect')}}">Logout</a>
 				{% endif %}
