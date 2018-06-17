@@ -27,25 +27,12 @@
 		
 			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 
-					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
-					
-					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
-						<ul data-bind="foreach: listPlaces" class="list-group">
-							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
-						</ul>
-					</div>
-
-					<a class="navbar-brand dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
+					<a class="navbar-brand dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places of Power</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
 							<ul data-bind="foreach: listPlaces" class="list-group">
 									<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
 							</ul>
-					</button>
-					
-					<a class="navbar-brand" href="{{url_for('showMap')}}">Places of Power</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
 					</button>
 					
 					<div class="collapse navbar-collapse" id="navbarsExampleDefault">
