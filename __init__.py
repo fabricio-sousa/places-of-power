@@ -221,7 +221,7 @@ def disconnect():
         del login_session['user_id']
         del login_session['provider']
         flash("You have successfully been logged out.")
-        return redirect(url_for('showPlaces'))
+        return redirect(url_for('showMap'))
     else:
         flash("You were not logged in")
         return redirect(url_for('showMap'))
