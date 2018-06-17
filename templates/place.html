@@ -22,7 +22,7 @@
     <h6><strong>Latitude and Longitude:</strong> {{place.lat}}, {{place.lng}}</h6>
     <h6>Added by: {{place.user_name}} on {{place.date.strftime("%-d-%b-%Y at %I:%M %p")}}.</h6>
     <br class="mb-1">
-    {%if 'username' not in session %}
+    {% if login_session['user_id'] = place.user_id: %}
     <div class="btn-group">
       <hr class="mb-4">
       <a href="{{url_for('editPlace', place_id = place.id)}}">
