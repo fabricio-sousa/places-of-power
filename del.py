@@ -23,7 +23,7 @@ session.commit()
 # print "Place and User deleted!"
 
 
-user = session.query(User).filter_by(id=3).one()
+user = session.query(User).filter_by(id=4).one()
 
 print user.name
 
