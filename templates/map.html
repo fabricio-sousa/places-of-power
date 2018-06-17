@@ -55,7 +55,7 @@
 					<a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Places</a>
 					
 					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
-						<ul data-bind="foreach: listPlaces" class="list-group">
+						<ul class="nav-item active" data-bind="foreach: listPlaces" class="list-group">
 							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
 						</ul>
 					</div>
