@@ -37,6 +37,9 @@
 							<li class="nav-item active">
 								<a class="nav-link" href="{{url_for('addPlace')}}">Add a Place of Power</a>
 							</li>
+							<li class="nav-item active">
+									<a class="nav-link" href="{{url_for('showPlaces')}}">See the Latest Places</a>
+							</li>
 							{%if 'username' in session %}
 							<li>
 								<a class="nav-link" href="{{url_for('disconnect')}}">Logout</a>
