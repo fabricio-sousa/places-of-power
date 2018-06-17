@@ -22,10 +22,13 @@ session.commit()
 
 # print "Place and User deleted!"
 
+users = session.query(User).all()
 
-user = session.query(User).filter_by(id=4).one()
-
-print user.name
+for user in users:
+    print user.name
+    print user.id
+    print user.email
+    
 
 
 
