@@ -37,7 +37,7 @@
     <main role="main" class="container">
         <div class="starter-template">
             <img src="{{url_for('static', filename='pyramid.jpg')}}" class="img-fluid img-thumbnail" alt="Picture of a Place of Power" height="400" width="400">
-            <h2>Places of Power</h2>
+            <h2 class="signin">Places of Power</h2>
             <h3 id="signin" class="h3 mb-3 font-weight-normal">Please sign in first:</h3>
 
             <!--Google Sign In -->
@@ -64,6 +64,7 @@
                 // Hide the sign-in button now that the user is authorized
                 $('#signinButton').attr('style', 'display: none');
                 $('#signin').attr('style', 'display: none');
+                $('.signin').attr('style', 'display: none');
                 // Send the one-time-use code to the server, if the server responds, write a 'login successful' message to the web page and then redirect back to the main restaurants page
                 $.ajax({
                     type: 'POST',
