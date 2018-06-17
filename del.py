@@ -25,7 +25,7 @@ session.commit()
 
 user = session.query(User).filter_by(id=2).one()
 
-print user
+print user.name
 
 
 
