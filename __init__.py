@@ -44,51 +44,16 @@ DBSession = scoped_session(sessionmaker(bind=engine))
 session = DBSession()
 
 
-def login_required(f):
-    '''Checks to see whether a user is logged in'''
-    @wraps(f)
-    def x(*args, **kwargs):
-        if 'username' not in login_session:
-            return redirect('/login')
-        return f(*args, **kwargs)
-    return x
-
-
 # Create anti-forgery state token
 @app.route('/login')
 def showLogin():
-
-    state = ''.join(random.choice(string.ascii_uppercase + string.digits)
-                    for x in xrange(32))
+    state = ''.join(
+        random.choice(string.ascii_uppercase + string.digits) for x in range(32))
     login_session['state'] = state
     # return "The current session state is %s" % login_session['state']
     return render_template('signin.html', STATE=state)
 
 
-# User Helper Functions
-def createUser(login_session):
-    newUser = User(name=login_session['username'], email=login_session[
-                   'email'], picture=login_session['picture'])
-    session.add(newUser)
-    session.commit()
-    user = session.query(User).filter_by(email=login_session['email']).one()
-    return user.id
-
-
-def getUserInfo(user_id):
-    user = session.query(User).filter_by(id=user_id).one()
-    return user
-
-
-def getUserID(email):
-    try:
-        user = session.query(User).filter_by(email=email).one()
-        return user.id
-    except:
-        return None
-
-
-# gconnect
 @app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
@@ -116,7 +81,6 @@ def gconnect():
            % access_token)
     h = httplib2.Http()
     result = json.loads(h.request(url, 'GET')[1])
-
     # If there was an error in the access token info, abort.
     if result.get('error') is not None:
         response = make_response(json.dumps(result.get('error')), 500)
@@ -142,13 +106,13 @@ def gconnect():
     stored_access_token = login_session.get('access_token')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_access_token is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps(
-                  'Current user is already connected. '), 200)
+        response = make_response(json.dumps('Current user is already connected.'),
+                                 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
     # Store the access token in the session for later use.
-    login_session['credentials'] = credentials.access_token
+    login_session['access_token'] = credentials.access_token
     login_session['gplus_id'] = gplus_id
 
     # Get user info
@@ -176,19 +140,41 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += '''"style = "width: 200px;
-                            height: 200px;border-radius: 150px;
-                            -webkit-border-radius: 150px;
-                            -moz-border-radius: 150px;">'''
+    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("You are now logged in as %s" % login_session['username'])
-    print "done!"
     return output
 
+# User Helper Functions
 
-@app.route('/gdisconnect')
+
+def createUser(login_session):
+    newUser = User(name=login_session['username'], email=login_session[
+                   'email'], picture=login_session['picture'])
+    session.add(newUser)
+    session.commit()
+    user = session.query(User).filter_by(email=login_session['email']).one()
+    return user.id
+
+
+def getUserInfo(user_id):
+    user = session.query(User).filter_by(id=user_id).one()
+    return user
+
+
+def getUserID(email):
+    try:
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
+    except:
+        return None
+
+# DISCONNECT - Revoke a current user's token and reset their login_session
+
+
+@@app.route('/gdisconnect')
 def gdisconnect():
     # Only disconnect a connected user.
-    access_token = login_session.get('credentials')
+    access_token = login_session.get('access_token')
     if access_token is None:
         response = make_response(
             json.dumps('Current user not connected.'), 401)
@@ -205,26 +191,6 @@ def gdisconnect():
         response = make_response(json.dumps('Failed to revoke token for given user.', 400))
         response.headers['Content-Type'] = 'application/json'
         return response
-
-
-# Disconnect based on provider
-@app.route('/disconnect')
-def disconnect():
-    if 'provider' in login_session:
-        if login_session['provider'] == 'google':
-            gdisconnect()
-            del login_session['gplus_id']
-            del login_session['access_token']
-        del login_session['username']
-        del login_session['email']
-        del login_session['picture']
-        del login_session['user_id']
-        del login_session['provider']
-        flash("You have successfully logged out.")
-        return redirect(url_for('showMap'))
-    else:
-        flash("You were not logged in.")
-        return redirect(url_for('showMap'))
 
 
 # Main landing page for Places of Power
@@ -346,6 +312,21 @@ def showMap():
 def placesJSON():
     places = session.query(Place).all()
     return jsonify(places=[r.serialize for r in places])
+
+# Disconnect based on provider
+@app.route('/disconnect')
+def disconnect():
+    if 'provider' in login_session:
+        if login_session['provider'] == 'google':
+            gdisconnect()
+            del login_session['gplus_id']
+            del login_session['access_token']
+        del login_session['username']
+        del login_session['email']
+        del login_session['picture']
+        del login_session['user_id']
+        del login_session['provider']
+        flash("You have successfully logged out.")
 
 
 if __name__ == '__main__':

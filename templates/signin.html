@@ -42,9 +42,7 @@
 
             <!--Google Sign In -->
             <div id="signinButton">
-                <span class="g-signin" data-scope="openid email" data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com"
-                    data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin"
-                    data-callback="signInCallback" data-approvalprompt="force">
+                <span class="g-signin" data-scope="openid email" data-clientid="1026760767811-ma9q6akbgcip7kr5ppb0nj3jm8af9fnk.apps.googleusercontent.com" data-redirecturi="postmessage" data-accesstype="offline" data-cookiepolicy="single_host_origin" data-callback="signInCallback" data-approvalprompt="force">
                     </span>
             </div>
             <!-- End of Google Sign In -->
@@ -75,28 +73,26 @@
                     success: function(result) {
                         // Handle or verify the server response if necessary.
                         if (result) {
-                            $('#result').html(result +
-                                '<br><h2 class="h3 mb-3 font-weight-normal">Retrieving the latest Places of Power...</h2>'
-                            )
+                            $('#result').html(result + '<br><h2 class="h3 mb-3 font-weight-normal">Retrieving the latest Places of Power...</h2>');
                             setTimeout(function() {
-                                window.location.href =
-                                    "/";
+                                window.location.href = "/restaurant";
                             }, 4000);
                         } else if (authResult['error']) {
-                            console.log('There was an error: ' +
-                                authResult['error']);
+                            console.log('There was an error: ' + authResult['error']);
                         } else {
-                            $('#result').html(
-                                'Failed to make a server-side call. Check your configuration and console.'
-                            );
+                            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
                         }
+                    },
+                    error: function(result) {
+                        console.log('There was an error: ' + result);
                     }
+
                 });
             }
         }
     </script>
     <!-- End of Google Sign In -->
-    
+
 </body>
 
 </html>
