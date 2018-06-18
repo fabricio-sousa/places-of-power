@@ -52,7 +52,7 @@ def login_required(f):
     return x
 
 # Create anti-forgery state token
-@app.route('/login/')
+@app.route('/login')
 def login():
     """Route to the login page and create anti-forgery state token."""
 
