@@ -17,6 +17,7 @@ import json
 from flask import make_response
 import requests
 from functools import wraps
+from httplib import ResponseNotReady
 
 
 # Create a new Flask app.
@@ -83,7 +84,8 @@ def gconnect():
             json.dumps('Failed to upgrade the authorization code.'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
-
+    except ResponseNotReady:
+        credentials = oauth_flow.step2_exchange(code)
     # Check that the access token is valid.
     access_token = credentials.access_token
     url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s'
