@@ -114,7 +114,7 @@ function geocodePlace(geocoder, place, placesMap) {
                 function() {
                     placetext(place);
                     markerBounce(place.marker);
-                    map.panTo(place.marker.position)
+                    map.panTo(place.marker.position);
                 });
 
             //Resize Function
