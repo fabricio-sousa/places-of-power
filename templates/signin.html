@@ -75,7 +75,7 @@
                         if (result) {
                             $('#result').html(result + '<br><h2 class="h3 mb-3 font-weight-normal">Retrieving the latest Places of Power...</h2>');
                             setTimeout(function() {
-                                window.location.href = "/restaurant";
+                                window.location.href = "/";
                             }, 4000);
                         } else if (authResult['error']) {
                             console.log('There was an error: ' + authResult['error']);
