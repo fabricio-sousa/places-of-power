@@ -91,7 +91,7 @@ function geocodePlace(geocoder, place, placesMap) {
         'location': latlng
     }, function(results, status) {
         if (status === 'OK') {
-            placesMap.setCenter(results[0].geometry.location);
+            
 
             // Create a new place marker object based on geocode latlng results.
             // Animate the marker.
