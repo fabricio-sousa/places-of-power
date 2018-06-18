@@ -53,13 +53,13 @@ def login_required(f):
 
 # Create anti-forgery state token
 @app.route('/login')
-def login():
+def showLogin():
     """Route to the login page and create anti-forgery state token."""
 
     state = ''.join(random.choice(string.ascii_uppercase + string.digits)
                     for x in range(32))
     login_session['state'] = state
-    return render_template("login.html", STATE=state)
+    return render_template("signin.html", STATE=state)
 
 
 # Connect to the Google Sign-in oAuth method.
