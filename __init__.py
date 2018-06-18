@@ -180,7 +180,7 @@ def gconnect():
                             height: 200px;border-radius: 150px;
                             -webkit-border-radius: 150px;
                             -moz-border-radius: 150px;">'''
-    flash("you are now logged in as %s" % login_session['username'])
+    flash("You are now logged in as %s" % login_session['username'])
     print "done!"
     return output
 
@@ -220,10 +220,10 @@ def disconnect():
         del login_session['picture']
         del login_session['user_id']
         del login_session['provider']
-        flash("You have successfully been logged out.")
+        flash("You have successfully logged out.")
         return redirect(url_for('showMap'))
     else:
-        flash("You were not logged in")
+        flash("You were not logged in.")
         return redirect(url_for('showMap'))
 
 
