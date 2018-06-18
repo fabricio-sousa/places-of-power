@@ -42,6 +42,14 @@ Base.metadata.bind = engine
 DBSession = scoped_session(sessionmaker(bind=engine))
 session = DBSession()
 
+def login_required(f):
+    '''Checks to see whether a user is logged in'''
+    @wraps(f)
+    def x(*args, **kwargs):
+        if 'username' not in login_session:
+            return redirect('/login')
+        return f(*args, **kwargs)
+    return x
 
 # Create anti-forgery state token
 @app.route('/login')
