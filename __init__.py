@@ -1,5 +1,4 @@
 #!/usr/bin/env python2.7
-
 # Import modules and dependencies.
 import os
 import base64
@@ -171,7 +170,7 @@ def getUserID(email):
 # DISCONNECT - Revoke a current user's token and reset their login_session
 
 
-@@app.route('/gdisconnect')
+@app.route('/gdisconnect')
 def gdisconnect():
     # Only disconnect a connected user.
     access_token = login_session.get('access_token')
