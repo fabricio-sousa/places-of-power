@@ -352,15 +352,26 @@ def placesJSON():
 def disconnect():
 
     if 'username' in login_session:
-        gdisconnect()
-        del login_session['google_id']
-        del login_session['access_token']
-        del login_session['username']
-        del login_session['email']
-        del login_session['picture']
-        del login_session['user_id']
-        flash("You have successfully logged out.")
-        return redirect(url_for('showMap'))
+        try:
+            gdisconnect()
+            del login_session['google_id']
+            del login_session['access_token']
+            del login_session['username']
+            del login_session['email']
+            del login_session['picture']
+            del login_session['user_id']
+            flash("You have successfully logged out.")
+            return redirect(url_for('showMap'))
+        except ResponseNotReady:
+            gdisconnect()
+            del login_session['google_id']
+            del login_session['access_token']
+            del login_session['username']
+            del login_session['email']
+            del login_session['picture']
+            del login_session['user_id']
+            flash("You have successfully logged out.")
+            return redirect(url_for('showMap'))
     else:
         flash("You were not logged in!")
         return redirect(url_for('showMap'))
