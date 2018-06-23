@@ -275,7 +275,7 @@ def addPlace():
 @app.route('/place/<int:place_id>/details')
 def showPlace(place_id):
     place = session.query(Place).filter_by(id=place_id).one()
-    creator = getUserInfo(place.user_id)
+    creator = get_user_info(place.user_id)
     if ('username' 
         not in login_session 
         or creator.id != login_session['user_id']):
