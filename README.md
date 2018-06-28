@@ -15,7 +15,7 @@ HTML5 and CSS, Python 2.7, Javascript, PostgreSQL, Flask.
 
 ## Frontend Frameworks, Libraries, and APIs
 
-Javascript, KnockoutJS, jQuery, Bootstrap, the Google Maps API, Wikipedia's API and of course html and css. Google Map styles from SnazzyMaps.
+Javascript, KnockoutJS, jQuery, Bootstrap, the Google Maps API, Wikipedia's API (upcoming) and of course html and css. Google Map styles from SnazzyMaps.
 
 
 ## Linux Deployment - Software Used
