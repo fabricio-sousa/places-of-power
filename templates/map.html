@@ -1,91 +1,94 @@
 <!DOCTYPE html>
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<link rel="shortcut icon" href="{{url_for('static', filename='pyramid.png')}}">
-		<meta property="og:title" content="Places of Power" />
-		<meta property="og:type" content="website" />
-		<meta property="og:author" content="Fabricio Sousa" />
-		<meta property="og:description" content="A collection of Places of Power around the world. View and add your own!" />
-		<meta property="og:image" content="https://i.imgur.com/E4DZ4nH.jpg" />
-		<meta property="og:url" content="http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/main" />
-		<title>Places of Power</title>
-		<!-- Jquery javascript -->	
-		<script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}"></script>
-		<!-- Bootstrap core CSS -->
-		<link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap.min.css')}}">
-		<!-- Custom Styles -->
-		<link rel=stylesheet type=text/css href="{{url_for('static', filename='custom.css')}}">
-		<!-- Map app javascript -->		
-		<script src="{{url_for('static', filename='map.js')}}"></script>
-		
-	</head>
-	
-	<body>
-		
-			<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-					<a class="navbar-brand" href="{{url_for('showMap')}}">Places of Power</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{{url_for('static', filename='pyramid.png')}}">
+    <meta property="og:title" content="Places of Power" />
+    <meta property="og:type" content="website" />
+    <meta property="og:author" content="Fabricio Sousa" />
+    <meta property="og:description" content="A collection of Places of Power around the world. View and add your own!" />
+    <meta property="og:image" content="https://i.imgur.com/E4DZ4nH.jpg" />
+    <meta property="og:url" content="http://ec2-18-220-254-32.us-east-2.compute.amazonaws.com/main" />
+    <title>Places of Power</title>
+    <!-- Jquery javascript -->
+    <script src="{{url_for('static', filename='jquery-3.3.1.min.js')}}"></script>
+    <!-- Bootstrap core CSS -->
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='bootstrap.min.css')}}">
+    <!-- Custom Styles -->
+    <link rel=stylesheet type=text/css href="{{url_for('static', filename='custom.css')}}">
+    <!-- Map app javascript -->
+    <script src="{{url_for('static', filename='map.js')}}"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{{url_for('showMap')}}">Places of Power</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>
-					
-					<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-						<ul class="navbar-nav mr-auto">
-							{%if 'username' not in session %}
-							<li class="nav-item active">
-								<a class="nav-link" href="{{url_for('showLogin')}}">Login to Add a Place and See the Latest Places</a>
-							</li>
-							{% else %}
-							<li class="nav-item active">
-									<a class="nav-link" href="{{url_for('addPlace')}}">Add a Place</a>
-							</li>
-							<li class="nav-item active">
-									<a class="nav-link" href="{{url_for('showPlaces')}}">See the Latest Places</a>
-							</li>
-							<li class="nav-item active">
-								<a class="nav-link" href="{{url_for('disconnect')}}">Logout</a>
-							</li>							
-							{% endif %}
-							<li class="nav-item active">
-								<a class="nav-link" href="{{url_for('showHelp')}}">Help</a>
-							</li>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                {%if 'username' not in session %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('showLogin')}}">Login to Add a Place and See the Latest Places</a>
+                </li>
+                {% else %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('addPlace')}}">Add a Place</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('showPlaces')}}">See the Latest Places</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('disconnect')}}">Logout</a>
+                </li>
+                {% endif %}
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{url_for('showHelp')}}">Help</a>
+                </li>
 
 
-						</ul>
-					</div>
-					
-					<a class="nav-link" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show List</a>
-					
-					<div class="dropdown-menu" aria-labelledby="dropdown01"> <!-- List all Places -->
-						<ul data-bind="foreach: listPlaces" class="list-group">
-							<a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
-						</ul>
-					</div>
-					
-					<form class="form-inline my-2 my-lg-0"> <!-- Search for a Place -->
-						<input  data-bind="value: search, valueUpdate: 'input'" class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
-					</form>
-			</nav>
-				
-				<!-- The Google Map -->
-				<main role="main" class="container">
-					<div class="starter-template">
-						<div id="map"></div>
-					</div>
-				</main>
+            </ul>
+        </div>
 
-		<!-- KnockoutJS lib -->
-		<script src="{{url_for('static', filename='knockout.js')}}"></script>
-		<!-- Bootstrap javascript -->		
-		<script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
-		<script src="{{url_for('static', filename='popper.min.js')}}"></script>
-		<script src="{{url_for('static', filename='holder.min.js')}}"></script>
-		<!-- Google API -->
-		<script async defer
-    	src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBGNG2E7taR9czX5cF1PPWERZekDUXzyO8&callback=initMap">
-  		</script>
-	</body>
+        <a class="nav-link" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Show List</a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <!-- List all Places -->
+            <ul data-bind="foreach: listPlaces" class="list-group">
+                <a href="#" data-bind="text: name" onclick="clickMarker(this.innerHTML);" class="list-group-item list-group-item-action"></a>
+            </ul>
+        </div>
+
+        <form class="form-inline my-2 my-lg-0">
+            <!-- Search for a Place -->
+            <input data-bind="value: search, valueUpdate: 'input'" class="form-control mr-sm-2" type="text" placeholder="Search for a Place" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Go</button>
+        </form>
+    </nav>
+
+    <!-- The Google Map -->
+    <main role="main" class="container">
+        <div class="starter-template">
+            <div id="map"></div>
+        </div>
+    </main>
+
+    <!-- KnockoutJS lib -->
+    <script src="{{url_for('static', filename='knockout.js')}}"></script>
+    <!-- Bootstrap javascript -->
+    <script src="{{url_for('static', filename='bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='holder.min.js')}}"></script>
+    <!-- Google API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBGNG2E7taR9czX5cF1PPWERZekDUXzyO8&callback=initMap">
+    </script>
+</body>
+
 </html>

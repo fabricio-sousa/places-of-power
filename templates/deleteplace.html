@@ -1,14 +1,14 @@
 {% extends "main.html" %} {% block content %} {% include "header.html" %}
 
 <main role="main" class="container">
-	<div class="starter-template">
-		<form action="#" method = "post">
-			<button class="btn btn-md btn-outline-secondary" type="submit" id="submit">Delete {{place.name}}?</button>
-			<a href="{{url_for('showPlaces')}}">
+    <div class="starter-template">
+        <form action="#" method="post">
+            <button class="btn btn-md btn-outline-secondary" type="submit" id="submit">Delete {{place.name}}?</button>
+            <a href="{{url_for('showPlaces')}}">
 				<button class="btn btn-md btn-outline-secondary" type="button">Cancel</button>
 			</a>
-		</form>
-	</div>
+        </form>
+    </div>
 </main>
 
 {% endblock %}

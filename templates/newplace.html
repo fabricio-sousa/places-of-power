@@ -3,45 +3,45 @@
 <main role="main" class="container">
   <div class="starter-template">
 
-    <form action="#" method = "post" class="needs-validation" novalidate>
+      <form action="#" method="post" class="needs-validation" novalidate>
 
-      <h2>Add a new Place of Power</h2>
-      <br class="mb-0">
-      <label for="description">What is your name?</label>
-      <input type="text" maxlenghth="250" class="form-control"  name="user_name" id="address" placeholder="" required>
-      <div class="invalid-feedback">Please name your Place of Power.</div>
-      <br class="mb-2"> 
+          <h2>Add a new Place of Power</h2>
+          <br class="mb-0">
+          <label for="description">What is your name?</label>
+          <input type="text" maxlenghth="250" class="form-control" name="user_name" id="address" placeholder="" required>
+          <div class="invalid-feedback">Please name your Place of Power.</div>
+          <br class="mb-2">
 
-      <label for="description">What is the name of your Place of Power?</label>
-      <input type="text" maxlenghth="250" class="form-control"  name="name" id="address" placeholder="" required>
-      <div class="invalid-feedback">Please name your Place of Power.</div>
-      <br class="mb-2">    
-          
-      <label for="description">Please describe it. What makes it special to you?</label>
-      <input type="text" maxlenghth="250" class="form-control"  name="description" id="address" placeholder="" required>
-      <div class="invalid-feedback">Please describe your Place of Power.</div>          
-      <br class="mb-2"> 
-          
-      <label for="latitude">What is this place's latitude? (Please visit 
-        <a class="" href="http://latitude.to" target="_blank">Latitude</a> for coordinates.)</label>
-      <input type="text" maxlenghth="250" class="form-control"  name="lat" id="address" placeholder="" required>
-      <div class="invalid-feedback">Please enter this place's latitude.</div>          
-      <br class="mb-2"> 
-          
-      <label for="longitude">What is this place's longitude?</label>
-      <input type="text" maxlenghth="250" class="form-control"  name="lng" id="address" placeholder="" required>
-      <div class="invalid-feedback">Please enter this place's longitude.</div>          
-      <br class="mb-2"> 
-          
-      <label for="picture url">Please enter a picture URL for this place.</label>
-      <input type="text" maxlenghth="250" class="form-control"  name="picture_url" id="address" placeholder="" required>
-      <div class="invalid-feedback">Please enter a picture URL for this place.</div>          
-      <br class="mb-2"> 
+          <label for="description">What is the name of your Place of Power?</label>
+          <input type="text" maxlenghth="250" class="form-control" name="name" id="address" placeholder="" required>
+          <div class="invalid-feedback">Please name your Place of Power.</div>
+          <br class="mb-2">
 
-      <button class="btn btn-md btn-outline-secondary" type="submit" id="submit">Add</button>
-      <a href='{{url_for('showPlaces')}}'><button class="btn btn-md btn-outline-secondary" type="button">Cancel</button></a>
+          <label for="description">Please describe it. What makes it special to you?</label>
+          <input type="text" maxlenghth="250" class="form-control" name="description" id="address" placeholder="" required>
+          <div class="invalid-feedback">Please describe your Place of Power.</div>
+          <br class="mb-2">
 
-    </form>
+          <label for="latitude">What is this place's latitude? (Please visit 
+          <a class="" href="http://latitude.to" target="_blank">Latitude</a> for coordinates.)</label>
+          <input type="text" maxlenghth="250" class="form-control" name="lat" id="address" placeholder="" required>
+          <div class="invalid-feedback">Please enter this place's latitude.</div>
+          <br class="mb-2">
+
+          <label for="longitude">What is this place's longitude?</label>
+          <input type="text" maxlenghth="250" class="form-control" name="lng" id="address" placeholder="" required>
+          <div class="invalid-feedback">Please enter this place's longitude.</div>
+          <br class="mb-2">
+
+          <label for="picture url">Please enter a picture URL for this place.</label>
+          <input type="text" maxlenghth="250" class="form-control" name="picture_url" id="address" placeholder="" required>
+          <div class="invalid-feedback">Please enter a picture URL for this place.</div>
+          <br class="mb-2">
+
+          <button class="btn btn-md btn-outline-secondary" type="submit" id="submit">Add</button>
+          <a href='{{url_for(' showPlaces ')}}'><button class="btn btn-md btn-outline-secondary" type="button">Cancel</button></a>
+
+      </form>
 
   </div>
 </main>
